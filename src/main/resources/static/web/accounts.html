@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">      
+    <link rel="stylesheet" href="style.css">
+          <title>Accounts</title>
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center">
+        <div >
+            <img class="logo" src="./mbro-removebg-preview.png" alt="logo">
+        </div>
+        <nav>
+            <a href="./manager.html">Manager</a>
+            <a href="#">Accounts</a>
+        </nav>
+        
+    </header>
+    <main id="app">
+      
+        <h1 class="text-center">your accounts</h1>
+        <div class="d-flex  gap-5 w-100 justify-content-center customerCards">
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header">Account Holder</div>
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{firstName}} {{lastName}}</h5>
+                    <p class="card-text">Email: {{email}}</p>
+                </div>
+            </div>
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header">Total</div>
+                <div class="card-body">
+                    <p>money collected between the two accounts</p>
+                    <p class="card-text">${{totalAccounts}}</p>    
+                </div>
+            </div>
+        
+        </div>
+        
+       
+       
+
+        <div class="container ">
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table- table-hover align-middle table-secondary">
+                            <thead>
+                            <tr>
+                                <th class="col-4">Number</th>
+                                <th class="col-4">Creation Date</th>
+                                <th class="col-4">Balance</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-light">
+                            <tr v-for="account of accounts">
+                                <td>{{account.number}}</td>
+                                <td>{{account.creationDate}}</td>
+                                <td>${{account.balance}}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js" integrity="sha512-7GMwfb+7/uM9Iwmev3P5x7u/ZuyyoFgWIEaL+OkGW1lXy2Yp0/v0WQMyI7PzJj2fxocOHPiEhptcQtVPP5VPqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./accounts.js"></script>
+    <script src="./graphic.js"></script>
+</body>
+</html>
