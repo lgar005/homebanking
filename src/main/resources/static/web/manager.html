@@ -6,21 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="./css/styleAccounts.css">-->
     <title>Manager</title>
 </head>
 <body>
-    <header class="d-flex justify-content-between align-items-center">
-        <div >
-            <img class="logo" src="./mbro-removebg-preview.png" alt="logo">
-        </div>
-        <nav>
-            <a href="#">Manager</a>
-            <a href="./accounts.html">Accounts</a>
+    <header>
+        <nav class="navbar navbar-expand-lg container_a">
+            <div class="container-fluid container_a">
+                <a class="navbar-brand ms-5" href="#">
+                    <img class="nav_logo logo" src="./img/image.png" alt="Logo"  /></a>
+                <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end align-items-center container_a"
+                    id="navbarNav">
+                    <div class="navbar-nav nav_a d-flex align-items-center">
+                        
+                    </div>
+                </div>
+            </div>
         </nav>
-        
     </header>
     <main id="app" class="resposiveG">
+        <img class="managerImage container d-flex justify-content-center" src="./img/Work time-amico.png" alt="manager">
         <div class=" d-flex  justify-content-around sizeResponsive">
            <div>
                 <h2 class="text-center colorClientList">Client Manager</h2>
@@ -82,6 +96,33 @@
                 </div>
             </div>
         </div>
+        <footer class="d-flex justify-content-evenly flex-wrap">
+            <section class="d-flex flex-column justify-content-start mt-3 redes">
+                <h4 class="text_footer d-flex align-self-center">Redes sociales</h4>
+                <ul class="social d-flex align-items-start flex-column">
+                    <li class="fa-brands fa-instagram">
+                        <a href="https://www.instagram.com">Instagram</a>
+                    </li>
+                    <li class="fa-brands fa-facebook">
+                        <a href="https://www.facebook.com">Facebook</a>
+                    </li>
+                    <li class="fa-brands fa-whatsapp">
+                        <a href="https://www.whatsapp.com">Whatsapp</a>
+                    </li>
+                    <li class="fa-brands fa-youtube">
+                        <a href="https://youtube.com">Youtube</a>
+                    </li>
+                </ul>
+            </section>
+            <section class="d-flex flex-column align-items-center justify-content-start horarioC">
+                <ul class="social d-flex align-items-start flex-column" style="list-style: none;">
+                    <h4 class="text_footer d-flex">Visítanos</h4>
+                    <li><h5 class="horario"> Dirección: Paraguay 2334 5 F.</h5></li>
+                    <li><h5 class="horario"> Horario: <br> Lunes a viernes: 7:00 a 19:00. <br>
+                    Sábado: 8:00 a 17:00. <br> Domingo: No hay servicio.</h5></li>
+                </ul>
+            </section>
+        </footer>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
