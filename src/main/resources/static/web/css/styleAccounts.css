@@ -1,0 +1,437 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+  font-family: 'Merienda One', cursive;} 
+header{
+  min-height: 18vh;
+   background: #734a91;
+}
+.logo{
+  height: 90px;
+  width:195px;
+  object-fit: cover;
+}
+main{
+  min-height: 52vh;
+  background-color:  #f7e8ff;
+}
+/**/
+.card {
+    --cardbg: 245, 245, 245;
+    --cardBase: 235, 16, 206;
+    --cardText: 100, 100, 100;
+    --cardTextBtn: 106, 16, 88;
+    --cardsquares: 156, 113, 227;
+    display: flex;
+    flex-flow: column nowrap;
+    place-items: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 3em rgba(var(--cardBase), .25),
+    inset 0 -.25em 1px rgba(var(--cardBase), .125);
+    border-radius: 4px;
+    background: rgba(var(--cardbg), 1);
+    position: relative;
+    width: 220px;
+    height: 310px;
+    perspective: 1000px;
+    z-index: 0;
+    transition: all 1s ease-out;
+  }
+  
+  .card:hover {
+    filter: grayscale(0%);
+    scale: 1.025;
+    box-shadow: 0 0 5em rgba(var(--cardBase), .5);
+  }
+  
+  .card::after,
+  .card::before {
+    content: '';
+    width: 200px;
+    height: 50%;
+    display: block;
+    background-color: rgba(var(--cardsquares), .5);
+    filter: blur(10px);
+    position: absolute;
+    transition: all 5s ease-out;
+    opacity: .1;
+    z-index: 0;
+  }
+  
+  .card:hover::after,
+  .card:hover::before {
+    opacity: .5;
+    rotate: 60deg;
+  }
+  
+  .card:hover::after {
+   translate: 100% 0;
+  }
+  
+  .card:hover::before {
+    translate: -100% 0;
+  }
+  
+  .card .card-title {
+    color: rgba(var(--cardText), .75);
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: .5em;
+    position: relative;
+    transition: all .3s ease-out;
+    z-index: 100;
+    text-shadow: 0px 0px 0px rgba(var(--cardText), .25);
+  }
+  
+  .card:hover h3 {
+    color: rgba(var(--cardText), 1);
+    text-shadow: 0px 8px 5px rgba(var(--cardText), .35);
+  }
+  
+  .card:hover span {
+    filter: grayscale(0%);
+  }
+  
+  /* Inner card */
+  .card-info::after {
+    left: -6rem;
+    bottom: 0;
+  }
+  
+  .card-info::before {
+    right: -6rem;
+    top: 1rem;
+  }
+  
+  /* Avatar container */
+  .card-info span {
+    color: rgba(var(--cardBase), 1);
+    display: flex;
+    place-items: center;
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: rgba(var(--cardBase), .5);
+    height: 80px;
+    width: 50%;
+    box-shadow: inset 0px 2px 4px rgba(var(--cardBase), .95),
+    inset 0px 2px 40px rgba(var(--cardbg), .95);
+    position: relative;
+    transition: all .3s ease-out .1s;
+    filter: grayscale(75%);
+    z-index: 0;
+  }
+  
+  .card-info span:hover .avatar {
+    scale: 1.5;
+  }
+  
+  .avatar {
+    transition: all .3s ease-out;
+    position: relative;
+  }
+  
+  /* Inner card container and UI */
+  .card-info {
+    --angle: 0deg;
+    display: flex;
+    flex-flow: column nowrap;
+    place-items: center;
+    padding: 1em;
+    margin: 0 .75em;
+    color: rgba(var(--cardText), 1);
+    background-color: rgba(250, 246, 246, 1);
+    transition: all .5s ease-out;
+    animation: animateBorder 10s linear infinite reverse;
+    border: .15em solid;
+    position: relative;
+    z-index: 10;
+    border-image: linear-gradient(var(--angle), rgba(var(--cardbg), 1), rgba(var(--cardBase), .5), rgba(var(--cardbg), 1)) 1;
+  }
+  
+  .card-info p {
+    color: rgba(var(--cardText), 1);
+    line-height: 1.25em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    font-size: 1em;
+    margin: 1em 0;
+    transition: all .3s ease-out .3s;
+  }
+  
+  .card-info .btn {
+    display: block;
+    padding: 8px 16px;
+    background-color: rgba(var(--cardBase), .35);
+    color: rgba(var(--cardTextBtn), .75);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: .85em;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card-info .btn:hover {
+    cursor: pointer;
+    background-color: rgba(var(--cardsquares), .35);
+  }
+  
+  .card-info .btn:active {
+    box-shadow: inset 0px -2px 3px rgba(var(--cardBase), .25);
+  }
+  
+  /* Card links container */
+  .card-links {
+    transition: all .3s linear;
+    opacity: 0;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
+    position: relative;
+    top: -2rem;
+    list-style: none;
+    color: rgba(var(--cardText), 1);
+    font-size: .75em
+  }
+  
+  .card-links a {
+   transition: color .3s ease-out;
+  }
+  
+  .card-links a:hover {
+    color: rgba(var(--cardBase), .75);
+  }
+  
+  /* Card chckbox active state */
+  .card input[type="checkbox"] {
+    visibility: hidden;
+  }
+  
+  .card:hover:has(#toggle:checked) .card-title {
+    text-shadow: 0px 2px 5px rgba(var(--cardText), .35);
+  }
+  
+  .card:has(#toggle:checked) {
+    border-radius: 10px;
+    height: 295px;
+  }
+  
+  .card:has(#toggle:checked) .card-info > *:not(.btn):not(span) {
+    opacity: 0;
+  }
+  
+  .card:has(#toggle:checked) .card-info {
+    translate: 0 -20%;
+    border-width: 1px;
+    border: none;
+    box-shadow: inset 0 0 5px rgba(var(--cardBase), .5),
+    inset 0px 0px 2px rgba(var(--cardText), .25),
+    inset 0px 30px 40px rgba(var(--cardBase), .25);
+    border-radius: 10px;
+  }
+  
+  .card:has(#toggle:checked) .card-info span {
+    translate: 0 75%;
+  }
+  
+  .card:has(#toggle:checked) .card-info p {
+    transition: all .1s ease-out;
+  }
+  
+  .card:has(#toggle:checked) .card-links {
+    opacity: 1;
+    top: -2rem;
+  }
+  
+  .card #toggle {
+    visibility: hidden;
+  }
+  
+  @keyframes animateBorder {
+    to {
+      --angle: 360deg;
+    }
+  }
+  
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+  /**/
+.infoAcounts{
+   background-color: #fdf0fd;
+    height: 305px;
+    width: 700px;
+}
+
+.colorTitles{
+    color: #734a91;
+}
+/*Account Card*/
+.accountCard {
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    width: 320px;
+    height: 350px;
+    border-radius: 20px;
+  }
+  
+  .title {
+    display: flex;
+    align-items: center;
+  }
+  
+  .title span {
+    position: relative;
+    padding: 0.5rem;
+    background-color: #10B981;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+  }
+  
+  .title span svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    height: 1rem;
+  }
+  
+  .title-text {
+    margin-left: 0.5rem;
+    color: #374151;
+    font-size: 18px;
+  }
+  .data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.data p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #1F2937;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    text-align: left;
+}
+.iconos{
+ color: #734a91;
+}
+.colorButton{
+  background-color: #734a91;
+  color: white;
+}
+.infoAccountTransactions{
+  width: 500px;
+  height: 350px;
+  background-color:white;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+footer{
+    height: 30vh;
+     background: #734a91;
+}
+@media (min-width:320px) and (max-width:700px){
+  .accountCardResponsive{
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .infoAcounts{
+    width: 320px;
+  }
+  .card {
+    transition: none;
+  }
+
+ .card::before {
+        transition: none;
+  }
+
+ .card:hover::after {
+   translate: none;
+  }
+  
+  .card:hover::before {
+    translate: none;
+  }
+  
+  .card .card-title {
+    color: none;
+    transition: none;
+    text-shadow: none;
+  }
+  .avatar {
+    transition: none;
+  }
+  /* Inner card container and UI */
+  .card-info {
+    transition: none;
+    animation: none;
+     border-image: linear-gradient(var(--angle), rgba(var(--cardbg), 1), rgba(var(--cardBase), .5), rgba(var(--cardbg), 1)) 1;
+  }
+  .card-info p { 
+    transition:none;
+  }
+  .card-info .btn {
+
+    transition: none;
+  }
+
+ /* Card links container */
+  .card-links {
+    transition: none;
+      }
+  
+  .card-links a {
+   transition: none;
+  }
+
+  .card:has(#toggle:checked) .card-info {
+    translate: none;
+   
+  }
+  
+  .card:has(#toggle:checked) .card-info span {
+    translate: none;
+  }
+  
+  .card:has(#toggle:checked) .card-info p {
+    transition: none;
+  }
+
+}
+@media (max-width:500px){
+  .infoAccountTransactions{
+    width: auto;
+  }
+}
+@media (min-width:0px)and (max-width:700px) {
+  .emailResponsive{
+    display: none;
+  }
+  .card{
+    pointer-events: none !important;
+    
+   
+  }
+  .card-info{
+    pointer-events: none !important;
+  }
+}
+
+    
