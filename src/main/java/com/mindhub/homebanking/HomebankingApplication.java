@@ -45,25 +45,25 @@ public class HomebankingApplication {
 			String date2= fmt.format(dateCreationNow);
 			LocalDateTime date2f=LocalDateTime.parse(date2,fmt);
 
-			Account account1=new Account("VIN001", date2f,5000);
-			Account account2=new Account("VIN002",date1f,7500);
-			Account account3=new Account("VIN003", date2f,10000);
-			Account account4=new Account("VIN004",date1f,700);
+			Account account1=new Account("VIN001", date2f,50000);
+			Account account2=new Account("VIN002",date1f,75000);
+			Account account3=new Account("VIN003", date2f,100000);
+			Account account4=new Account("VIN004",date1f,70000);
 			client1.addAccount(account1);
 			client1.addAccount(account2);
 			client2.addAccount(account3);
 			client2.addAccount(account4);
 
-			Transaction transaction1= new Transaction(TransactionType.CREDIT,100, "transaccion credito", date2f);
-			Transaction transaction2= new Transaction(TransactionType.CREDIT,90, "transaccion credito", date2f);
+			Transaction transaction1= new Transaction(TransactionType.CREDIT,7700, "transaccion credito", date2f);
+			Transaction transaction2= new Transaction(TransactionType.CREDIT,90, "transaccion credito", date1f);
 			Transaction transaction3= new Transaction(TransactionType.CREDIT,1000, "transaccion credito",date2f);
-			Transaction transaction4= new Transaction(TransactionType.CREDIT,900, "transaccion credito", date2f);
+			Transaction transaction4= new Transaction(TransactionType.CREDIT,900, "transaccion credito", date1f);
 			Transaction transaction5= new Transaction(TransactionType.DEBIT,700, "transaccion debito", date2f);
-			Transaction transaction6= new Transaction(TransactionType.DEBIT,300, "transaccion debito", date2f);
+			Transaction transaction6= new Transaction(TransactionType.DEBIT,300, "transaccion debito", date1f);
 			Transaction transaction7= new Transaction(TransactionType.DEBIT,770, "transaccion debito", date2f);
-			Transaction transaction8= new Transaction(TransactionType.DEBIT,880, "transaccion debito", date2f);
-			Transaction transaction9= new Transaction(TransactionType.DEBIT,7700, "transaccion debito", date2f);
-			Transaction transaction10= new Transaction(TransactionType.CREDIT,8800, "transaccion credito", date2f);
+			Transaction transaction8= new Transaction(TransactionType.DEBIT,880, "transaccion debito", date1f);
+			Transaction transaction9= new Transaction(TransactionType.DEBIT,100, "transaccion debito", date2f);
+			Transaction transaction10= new Transaction(TransactionType.CREDIT,8800, "transaccion credito", date1f);
 			account1.addTransaction(transaction1);
 			account2.addTransaction(transaction2);
 			account3.addTransaction(transaction3);
@@ -89,6 +89,16 @@ public class HomebankingApplication {
 			transactionRepository.save(transaction8);
 			transactionRepository.save(transaction9);
 			transactionRepository.save(transaction10);
+
+			account1.setBalance(account1.getBalance()+transaction1.getAmount()-transaction5.getAmount()-transaction9.getAmount());
+			account2.setBalance(account2.getBalance()+transaction2.getAmount()-transaction6.getAmount()+transaction10.getAmount());
+			account3.setBalance(account3.getBalance()+transaction3.getAmount()-transaction7.getAmount());
+			account4.setBalance(account4.getBalance()+transaction4.getAmount()-transaction8.getAmount());
+
+			accountRepository.save(account1);
+			accountRepository.save(account2);
+			accountRepository.save(account3);
+			accountRepository.save(account4);
 		};
 	}
 

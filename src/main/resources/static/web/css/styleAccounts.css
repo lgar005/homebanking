@@ -343,9 +343,40 @@ main{
   justify-content: space-around;
 }
 footer{
-    height: 30vh;
-     background: #734a91;
+  min-height: 30vh;
+  background: #734a91;
+  font-family: 'Merienda One', cursive !important;
 }
+.text_footer{
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.473);
+}
+.social{
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  }
+  .social li{
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.473);
+  }
+  .social a{
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.473);
+  }
+  
+  .text_footer{
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.473);
+  }
 @media (min-width:320px) and (max-width:700px){
   .accountCardResponsive{
     flex-direction: column !important;
@@ -394,24 +425,24 @@ footer{
 
  /* Card links container */
   .card-links {
-    transition: none;
+    /*transition: none;*/
       }
   
   .card-links a {
-   transition: none;
+   /*transition: none;*/
   }
 
   .card:has(#toggle:checked) .card-info {
-    translate: none;
+    /*translate: none;*/
    
   }
   
   .card:has(#toggle:checked) .card-info span {
-    translate: none;
+    /*translate: none;*/
   }
   
   .card:has(#toggle:checked) .card-info p {
-    transition: none;
+    /*transition: none;*/
   }
 
 }
@@ -421,17 +452,35 @@ footer{
   }
 }
 @media (min-width:0px)and (max-width:700px) {
-  .emailResponsive{
-    display: none;
-  }
-  .card{
-    pointer-events: none !important;
-    
-   
-  }
-  .card-info{
-    pointer-events: none !important;
-  }
+  /*.emailResponsive{
+    display: none;}*/
+  
 }
+@media  (min-width:701px){
+  /*.emailResponsive{
+    visibility: visible;
+  }*/
 
-    
+}
+@media only screen and (max-width: 616px) {
+  .horario{
+  font-size: 0.9rem;
+  width: 10rem;
+  }
+  .redes{
+  margin-right: 1rem;
+  }
+  .horarioC{
+  margin-left: 1rem;
+  }
+  .text_footer{
+  font-size: 1rem;
+  width: 4rem;
+  }
+  .social{
+  padding: 0;
+  }
+  .social a{
+  font-size: 0.9rem;
+  }
+  }

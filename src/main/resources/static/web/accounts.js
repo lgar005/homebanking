@@ -4,9 +4,6 @@ const app = createApp( {
     data(){
         return {
              accounts:[ ],
-             firstName:'',
-             lastName:'',
-             email:'',
              id:'',
              params:'',
              client:'',
@@ -34,19 +31,19 @@ const app = createApp( {
                         this.id= this.params.get("id");
                         console.log(this.id);
                         this.client=this.clients.find(client=>client.id.toString()===this.id)
-                        /*this.accounts=this.client.accounts
-                         console.log(this.accounts);
-                         console.log("hola")
-                         this.firstName=this.client.firstName
-                         this.lastName=this.client.lastName
-                         this.email=this.client.email
-                         this.balances=this.accounts.map(account=>account.balance)
-                         this.numberAccounts=this.accounts.map(account=>account.number)
-                         this.totalAccounts=this.balances.reduce((accumulator, currentValue)=>accumulator+=currentValue,0)
-                         this.percentages=this.balances.map(balance=>(balance*100)/this.totalAccounts)
-                         console.log(this.percentages)
-                         this.balanceFormat();*/
-                           })
+                        console.log(this.client)
+                        this.accounts=this.client.accounts
+                        console.log(this.accounts);
+                        this.balances=this.accounts.map(account=>account.balance)
+                        console.log(this.balances)
+                        this.numberAccounts=this.accounts.map(account=>account.number)
+                        this.totalAccounts=this.balances.reduce((accumulator, currentValue)=>accumulator+=currentValue,0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                        console.log(this.totalAccounts);
+                        console.log("$70,000.00"+"$100,000.00")
+                        this.percentages=this.balances.map(balance=>(balance*100)/this.totalAccounts)
+                        console.log(this.accounts.map(account=>account.creationDate.toString().replace('T', ' ')));
+                        this.balanceFormat();
+                        })
                      }catch{
                         console.log(err)
                      }
@@ -54,6 +51,8 @@ const app = createApp( {
                 balanceFormat(){
                     this.accounts.forEach(element => {
                         element.balance = element.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                        element.creationDate=element.creationDate.toString().replace('T', ' ')
+                        
                     })
                 }    
         },
