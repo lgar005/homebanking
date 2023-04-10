@@ -26,11 +26,9 @@ const app=createApp({
                     this.id= this.params.get("id")
                     this.account=this.accounts.find(account=>account.id.toString()===this.id)
                     this.transactions=this.account.transactions.sort((x,y)=>y.id-x.id)
-                    console.log(this.transactions)
                     this.amountFormat();
                     this.account.balance=this.account.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
                     this.account.creationDate=this.account.creationDate.toString().replace('T', ' ');
-                    console.log(this.account)
                 })
             }catch(err){
                 console.log(err)

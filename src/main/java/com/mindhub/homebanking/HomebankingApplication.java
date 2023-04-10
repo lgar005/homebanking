@@ -54,16 +54,16 @@ public class HomebankingApplication {
 			client2.addAccount(account3);
 			client2.addAccount(account4);
 
-			Transaction transaction1= new Transaction(TransactionType.CREDIT,7700, "transaccion credito", date2f);
-			Transaction transaction2= new Transaction(TransactionType.CREDIT,90, "transaccion credito", date1f);
-			Transaction transaction3= new Transaction(TransactionType.CREDIT,1000, "transaccion credito",date2f);
-			Transaction transaction4= new Transaction(TransactionType.CREDIT,900, "transaccion credito", date1f);
-			Transaction transaction5= new Transaction(TransactionType.DEBIT,700, "transaccion debito", date2f);
-			Transaction transaction6= new Transaction(TransactionType.DEBIT,300, "transaccion debito", date1f);
-			Transaction transaction7= new Transaction(TransactionType.DEBIT,770, "transaccion debito", date2f);
-			Transaction transaction8= new Transaction(TransactionType.DEBIT,880, "transaccion debito", date1f);
-			Transaction transaction9= new Transaction(TransactionType.DEBIT,100, "transaccion debito", date2f);
-			Transaction transaction10= new Transaction(TransactionType.CREDIT,8800, "transaccion credito", date1f);
+			Transaction transaction1= new Transaction(TransactionType.CREDIT,7700, "credit transaction", date2f);
+			Transaction transaction2= new Transaction(TransactionType.CREDIT,90, "credit transaction", date1f);
+			Transaction transaction3= new Transaction(TransactionType.CREDIT,1000, "credit transaction",date2f);
+			Transaction transaction4= new Transaction(TransactionType.CREDIT,900, "credit transaction", date1f);
+			Transaction transaction5= new Transaction(TransactionType.DEBIT,700, "debit transaction", date2f);
+			Transaction transaction6= new Transaction(TransactionType.DEBIT,300, "debit transaction", date1f);
+			Transaction transaction7= new Transaction(TransactionType.DEBIT,770, "debit transaction", date2f);
+			Transaction transaction8= new Transaction(TransactionType.DEBIT,880, "debit transaction", date1f);
+			Transaction transaction9= new Transaction(TransactionType.DEBIT,100, "debit transaction", date2f);
+			Transaction transaction10= new Transaction(TransactionType.CREDIT,8800, "credit transaction", date1f);
 			account1.addTransaction(transaction1);
 			account2.addTransaction(transaction2);
 			account3.addTransaction(transaction3);

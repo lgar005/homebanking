@@ -24,24 +24,16 @@ const app = createApp( {
          async getData(){
                     try{
                         axios.get('http://localhost:8080/api/clients')
-                        .then(elemento => {
-                        console.log(elemento)
+                        .then(elemento => {                       
                         this.clients=elemento.data;
                         this.params=new URLSearchParams(location.search)
-                        this.id= this.params.get("id");
-                        console.log(this.id);
-                        this.client=this.clients.find(client=>client.id.toString()===this.id)
-                        console.log(this.client)
-                        this.accounts=this.client.accounts
-                        console.log(this.accounts);
-                        this.balances=this.accounts.map(account=>account.balance)
-                        console.log(this.balances)
+                        this.id= this.params.get("id");                        
+                        this.client=this.clients.find(client=>client.id.toString()===this.id)                        
+                        this.accounts=this.client.accounts                        
+                        this.balances=this.accounts.map(account=>account.balance)                        
                         this.numberAccounts=this.accounts.map(account=>account.number)
-                        this.totalAccounts=this.balances.reduce((accumulator, currentValue)=>accumulator+=currentValue,0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
-                        console.log(this.totalAccounts);
-                        console.log("$70,000.00"+"$100,000.00")
+                        this.totalAccounts=this.balances.reduce((accumulator, currentValue)=>accumulator+=currentValue,0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })                     
                         this.percentages=this.balances.map(balance=>(balance*100)/this.totalAccounts)
-                        console.log(this.accounts.map(account=>account.creationDate.toString().replace('T', ' ')));
                         this.balanceFormat();
                         })
                      }catch{
