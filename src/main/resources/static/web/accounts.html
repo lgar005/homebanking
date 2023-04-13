@@ -67,7 +67,7 @@
                 <p class="colorTitles">Total Balance:  </p>
             </div>
             <div class="d-flex justify-content-around">
-                <p>2 </p>
+                <p>{{accounts.length}}</p>
                 <p> {{totalAccounts}}</p>
             </div>
            
@@ -112,6 +112,62 @@
         </div>
         
         </div>
+
+        <div>
+            <h2 class="text-center colorTitles pb-2">your loans</h2>
+            
+            <template v-if="loading">
+                <h6 class="text-center colorTitles">loading...</h6>
+            </template>
+            <template  v-else-if="loans.length!=0">
+            <div class="container pt-5 pb-5">
+                <div class="row">
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table- table-hover align-middle table-secondary">
+                                <thead>
+                                <tr>
+                                    <th class="col-3">Id</th>
+                                    <th class="col-3">Name</th>
+                                    <th class="col-3">Amount</th>
+                                    <th class="col-3">Payments</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-light">
+                                <tr v-for="loan of loans">
+                                        <td>{{loan.id}}</td>
+                                        <td >{{loan.nameLoan}}</td>
+                                        <td>{{loan.amount}}</td>
+                                        <td>{{loan.payments}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+               <!-- <h6 class="text-center colorTitles">You don't have loans</h6>-->
+               <div class="container d-flex justify-content-center pb-5">
+                <div class="notifications-container">
+                  <div class="success">
+                    <div class="flex">
+                      <div class="flex-shrink-0">
+                        <img class="iconLoan" src="./img/icons8-loan-68.png" alt="">
+                      </div>
+                      <div class="success-prompt-wrap">
+                        <p class="success-prompt-heading">Loans
+                        </p><div class="success-prompt-prompt ">
+                          <p>you have not applied for a loan. There is no information to consult</p>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </template>
+        </div>
     </main>
     <footer class="d-flex justify-content-evenly flex-wrap pt-5">
         <section class="d-flex flex-column justify-content-start mt-3 redes">
@@ -145,6 +201,6 @@
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./accounts.js"></script>
+    <script src="./js/accounts.js"></script>
 </body>
 </html>

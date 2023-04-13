@@ -19,12 +19,12 @@ const app=createApp({
     methods:{
         async getData(){
             try{
-                axios.get('http://localhost:8080/api/accounts')
+                this.params=new URLSearchParams(location.search)
+                this.id= this.params.get("id")
+                axios.get('http://localhost:8080/api/accounts/'+ this.id)
                 .then(elemento => {
-                    this.accounts=elemento.data
-                    this.params=new URLSearchParams(location.search)
-                    this.id= this.params.get("id")
-                    this.account=this.accounts.find(account=>account.id.toString()===this.id)
+                    console.log(elemento.data)
+                    this.account=elemento.data
                     this.transactions=this.account.transactions.sort((x,y)=>y.id-x.id)
                     this.amountFormat();
                     this.account.balance=this.account.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
