@@ -23,7 +23,7 @@ public class HomebankingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository) {
+	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of client
 			Client client1=new Client("Melba", "Morel"," melba@mindhub.com");
@@ -140,6 +140,18 @@ public class HomebankingApplication {
 			client2.addClientLoan(clientLoan4);
 			loan3.addClientLoan(clientLoan4);
 			clientLoanRepository.save(clientLoan4);
+
+			Card card1= new Card(client1.getFirstName()+ " "+ client1.getLastName(), CardType.DEBIT, CardColor.GOLD, "3325-6745-7876-4445",990, date2f, date2f.plusYears(5));
+			Card card2= new Card(client1.getFirstName()+ " "+ client1.getLastName(), CardType.CREDIT, CardColor.TITANIUM, "2234-6745-5520-7888",750, date2f, date2f.plusYears(5));
+			Card card3= new Card(client2.getFirstName()+ " "+ client2.getLastName(), CardType.CREDIT, CardColor.SILVER, "7750-3435-8620-0000",124, date2f, date2f.plusYears(5));
+
+			client1.addCard(card1);
+			client1.addCard(card2);
+			client2.addCard(card3);
+
+			cardRepository.save(card1);
+			cardRepository.save(card2);
+			cardRepository.save(card3);
 		};
 	}
 
