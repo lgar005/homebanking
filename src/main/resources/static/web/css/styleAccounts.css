@@ -613,6 +613,11 @@ object-fit: cover;
     display: flex;
     justify-content: center;
   }
+  #sidebar .brand .logoM{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+  }
   #sidebar .side-menu {
     width: 100%;
     margin-top: 48px;
