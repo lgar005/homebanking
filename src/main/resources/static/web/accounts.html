@@ -15,11 +15,13 @@
     <title>Accounts</title>
 </head>
 <body>
-    <!--<header>
+    <header>
         <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid ">
-                <a class="navbar-brand " href="#">
-                    <img class="nav_logo logo" src="./img/image.png" alt="Logo"  /></a>
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img class=" logoHeader " src="./img/MLogo-removebg-preview.png" alt="Logo"/>
+                    <p class="titleMB px-2"> Mindhub Brothers</p>
+                </a>
                 <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,7 +29,8 @@
                 <div class="collapse navbar-collapse justify-content-end align-items-center"
                     id="navbarNav">
                     <div class="navbar-nav nav_a d-flex align-items-center">
-                        
+                        <a class="nav-link estileA" href="#">Accounts</a>
+                        <a class="nav-link estileA" href="./cards.html">Cards</a>
                     </div>
                 </div>
             </div>
@@ -61,7 +64,7 @@
         
         <div class="infoAcounts">
             <h2 class="colorTitles text-center">Welcome {{client.firstName}}</h2>
-            <p class="text-center colorTitles">we are happy to see you again!</p>
+            <p class="text-center colorTitles">we are happy to see you!</p>
             <p class="text-center colorTitles">Here you will find information about your accounts</p>
             <div class="d-flex justify-content-around mt-5">
                 <p class="colorTitles">Nº Accounts: </p>
@@ -75,47 +78,43 @@
         </div>
         </div>
 
-        <h1 class="text-center colorTitles">your accounts</h1>
+        <h1 class="text-center colorTitles">Your accounts</h1>
 
        
         <div class="d-flex flex-row gap-5 w-100 justify-content-center accountCardResponsive  pt-3 pb-5">
-        <div class="accountCard"  v-for="account of accounts">   
+        <div class="accountCard "  v-for="account of accounts">   
             <div class="d-flex justify-content-center">
                 <img class="walletIcon" src="./img/iconBilletera.png" alt="incon-wallet">
             </div>
-            <div class="data">
-                <div class="d-flex iconos">
-                    <i class='fas fa-fingerprint' style='font-size:24px'></i>
+            <div class="data d-flex flex-column justify-content-around">
+                <div class="d-flex  iconos pt-3 ">
+                    <i class='fas fa-fingerprint px-2' style='font-size:24px'></i>
                     <p>
                         Number: {{account.number}}
                        
                     </p>
                 </div>
-                <div class="d-flex iconos">
-                    <i class='far fa-calendar-alt' style='font-size:30px'></i>
+                <div class="d-flex iconos pt-3">
+                    <i class='far fa-calendar-alt px-2' style='font-size:30px'></i>
                     <p>
                         Date: {{account.creationDate}}
                     </p>
                 </div>
+                <div class="d-flex iconos pt-3 pb-3 " >
+                    <i class='bx bxs-dollar-circle px-2' style='font-size:30px'></i>
+                    <p>
+                        Balance: {{account.balance}}
+                    </p>
+                </div>
             </div>
-            <div class="title">
-                <span>
-                    <svg width="20" fill="currentColor" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1362 1185q0 153-99.5 263.5t-258.5 136.5v175q0 14-9 23t-23 9h-135q-13 0-22.5-9.5t-9.5-22.5v-175q-66-9-127.5-31t-101.5-44.5-74-48-46.5-37.5-17.5-18q-17-21-2-41l103-135q7-10 23-12 15-2 24 9l2 2q113 99 243 125 37 8 74 8 81 0 142.5-43t61.5-122q0-28-15-53t-33.5-42-58.5-37.5-66-32-80-32.5q-39-16-61.5-25t-61.5-26.5-62.5-31-56.5-35.5-53.5-42.5-43.5-49-35.5-58-21-66.5-8.5-78q0-138 98-242t255-134v-180q0-13 9.5-22.5t22.5-9.5h135q14 0 23 9t9 23v176q57 6 110.5 23t87 33.5 63.5 37.5 39 29 15 14q17 18 5 38l-81 146q-8 15-23 16-14 3-27-7-3-3-14.5-12t-39-26.5-58.5-32-74.5-26-85.5-11.5q-95 0-155 43t-60 111q0 26 8.5 48t29.5 41.5 39.5 33 56 31 60.5 27 70 27.5q53 20 81 31.5t76 35 75.5 42.5 62 50 53 63.5 31.5 76.5 13 94z">
-                        </path>
-                    </svg>
-                </span>
-                <p class="title-text">
-                    Balance: {{account.balance}}
-                </p>
-            </div>
-            <a :href="'./account.html?id='+account.id" class="btn colorButton">Transactions</a>
+    
+            <a :href="'./account.html?id='+account.id" class="btn colorButton ">Transactions</a>
         </div>
         
         </div>
 
         <div>
-            <h2 class="text-center colorTitles pb-2">your loans</h2>
+            <h2 class="text-center colorTitles pb-2">Your loans</h2>
             
             <template v-if="loading">
                 <h6 class="text-center colorTitles">loading...</h6>
@@ -125,8 +124,8 @@
                 <div class="row">
                     <div class="col">
                         <div class="table-responsive">
-                            <table class="table table-bordered table- table-hover align-middle table-secondary">
-                                <thead>
+                            <table class="table ">
+                                <thead class="table-secondary">
                                 <tr>
                                     <th class="col-3">Id</th>
                                     <th class="col-3">Name</th>
@@ -196,216 +195,9 @@
                     Saturday: 8:00 to 17:00. <br> Sunday: 9:00 to 13:00</h5></li>
             </ul>
         </section>
-    </footer>-->
+    </footer>
 
-    <!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="#" class="brand">
-			<!--<i class='bx bxs-smile'></i>-->
-            <i class='bx bx-food-menu'></i>
-            <!--<img class="logoM" src="./img/logoMAzul.png" alt="">-->
-			<span class="text">Menu</span>
-		</a>
-		<ul class="side-menu top ">
-			<li class="active">
-				<a href="#">
-					<i class='bx bxs-credit-card-alt'></i>
-					<span class="text">Accounts</span>
-				</a>
-			</li>
-			<li>
-				<a href="./cards.html">
-					<i class='bx bx-wallet'></i>
-					<span class="text">Cards</span>
-				</a>
-			</li>
-			
-		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
-
-
-
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
-		
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/icons8-user-default-64.png">
-			</a>
-		</nav>
-		<!-- NAVBAR -->
-
-		<!-- MAIN -->
-		<main id="app">
-            <div class="d-flex justify-content-center pt-5  accountCardResponsive">
-                <div class="card mr-10">
-                    <div class="card-title">Account Holder</div>
-                    <div class="card-info">
-                    <span>
-                      <svg class="avatar" viewBox="-5 -10 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5.37164 12H3C1.34315 12 0 13.3431 0 15V21C0 22.6569 1.34315 24 3 24H17C18.6569 24 20 22.6569 20 21V15C20 13.3431 18.6569 12 17 12H14.6284C14.5071 12.1347 14.3785 12.2646 14.2426 12.3891C13.1174 13.4205 11.5913 14 10 14C8.4087 14 6.88258 13.4205 5.75736 12.3891C5.62152 12.2646 5.49286 12.1347 5.37164 12Z" fill="#D9D9D9"></path>
-                      <path d="M16 6.5C16 7.95869 15.3679 9.35764 14.2426 10.3891C13.1174 11.4205 11.5913 12 10 12C8.4087 12 6.88258 11.4205 5.75736 10.3891C4.63214 9.35764 4 7.95869 4 6.5L6.34017 6.5C6.34017 7.38976 6.72576 8.24308 7.41211 8.87223C8.09846 9.50139 9.02935 9.85485 10 9.85485C10.9706 9.85484 11.9015 9.50139 12.5879 8.87223C13.2742 8.24308 13.6598 7.38976 13.6598 6.5H16Z" fill="#D9D9D9"></path>
-                      <path d="M16 5.5C16 4.04131 15.3679 2.64236 14.2426 1.61091C13.1174 0.579463 11.5913 1.10128e-07 10 0C8.4087 -1.10128e-07 6.88258 0.579462 5.75736 1.61091C4.63214 2.64236 4 4.04131 4 5.5L4.85269 5.5C4.85269 4.24861 5.395 3.04848 6.3603 2.16361C7.32561 1.27875 8.63485 0.781634 10 0.781634C11.3652 0.781634 12.6744 1.27875 13.6397 2.16361C14.605 3.04848 15.1473 4.24861 15.1473 5.5H16Z" fill="#D9D9D9"></path>
-                      </svg>
-                    </span>
-                    <p>Name: {{client.firstName}} {{client.lastName}}</p>
-                   <label class="btn emailResponsive" for="toggle">
-                      Email
-                    </label>
-                    <input id="toggle" type="checkbox">
-                    </div>
-                    <ul class="card-links">
-                        <li>
-                        <a href="">{{client.email}}</a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="infoAcounts">
-                    <h2 class="colorTitles text-center">Welcome {{client.firstName}}</h2>
-                    <p class="text-center colorTitles">we are happy to see you again!</p>
-                    <p class="text-center colorTitles">Here you will find information about your accounts</p>
-                    <div class="d-flex justify-content-around mt-5">
-                        <p class="colorTitles">Nº Accounts: </p>
-                        <p class="colorTitles">Total Balance:  </p>
-                    </div>
-                    <div class="d-flex justify-content-around">
-                        <p>{{accounts.length}}</p>
-                        <p> {{totalAccounts}}</p>
-                    </div>
-                   
-                </div>
-                </div>
-        
-                <h1 class="text-center colorTitles">your accounts</h1>
-        
-               
-                <div class="d-flex flex-row gap-5 w-100 justify-content-center accountCardResponsive  pt-3 pb-5">
-                <div class="accountCard"  v-for="account of accounts">   
-                    <div class="d-flex justify-content-center">
-                        <img class="walletIcon" src="./img/iconBilletera.png" alt="incon-wallet">
-                    </div>
-                    <div class="data">
-                        <div class="d-flex iconos">
-                            <i class='fas fa-fingerprint' style='font-size:24px'></i>
-                            <p>
-                                Number: {{account.number}}
-                               
-                            </p>
-                        </div>
-                        <div class="d-flex iconos">
-                            <i class='far fa-calendar-alt' style='font-size:30px'></i>
-                            <p>
-                                Date: {{account.creationDate}}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="title">
-                        <span>
-                            <svg width="20" fill="currentColor" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1362 1185q0 153-99.5 263.5t-258.5 136.5v175q0 14-9 23t-23 9h-135q-13 0-22.5-9.5t-9.5-22.5v-175q-66-9-127.5-31t-101.5-44.5-74-48-46.5-37.5-17.5-18q-17-21-2-41l103-135q7-10 23-12 15-2 24 9l2 2q113 99 243 125 37 8 74 8 81 0 142.5-43t61.5-122q0-28-15-53t-33.5-42-58.5-37.5-66-32-80-32.5q-39-16-61.5-25t-61.5-26.5-62.5-31-56.5-35.5-53.5-42.5-43.5-49-35.5-58-21-66.5-8.5-78q0-138 98-242t255-134v-180q0-13 9.5-22.5t22.5-9.5h135q14 0 23 9t9 23v176q57 6 110.5 23t87 33.5 63.5 37.5 39 29 15 14q17 18 5 38l-81 146q-8 15-23 16-14 3-27-7-3-3-14.5-12t-39-26.5-58.5-32-74.5-26-85.5-11.5q-95 0-155 43t-60 111q0 26 8.5 48t29.5 41.5 39.5 33 56 31 60.5 27 70 27.5q53 20 81 31.5t76 35 75.5 42.5 62 50 53 63.5 31.5 76.5 13 94z">
-                                </path>
-                            </svg>
-                        </span>
-                        <p class="title-text">
-                            Balance: {{account.balance}}
-                        </p>
-                    </div>
-                    <a :href="'./account.html?id='+account.id" class="btn colorButton">Transactions</a>
-                </div>
-                
-                </div>
-        
-                <div>
-                    <h2 class="text-center colorTitles pb-2">your loans</h2>
-                    
-                    <template v-if="loading">
-                        <h6 class="text-center colorTitles">loading...</h6>
-                    </template>
-                    <template  v-else-if="loans.length!=0">
-                    <div class="container pt-5 pb-5">
-                        <div class="row">
-                            <div class="col">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table- table-hover align-middle table-secondary">
-                                        <thead>
-                                        <tr>
-                                            <th class="col-3">Id</th>
-                                            <th class="col-3">Name</th>
-                                            <th class="col-3">Amount</th>
-                                            <th class="col-3">Payments</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody class="table-light">
-                                        <tr v-for="loan of loans">
-                                                <td>{{loan.id}}</td>
-                                                <td >{{loan.nameLoan}}</td>
-                                                <td>{{loan.amount}}</td>
-                                                <td>{{loan.payments}}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                    <template v-else>
-                      
-                       <div class="container d-flex justify-content-center pb-5">
-                        <div class="notifications-container">
-                          <div class="success">
-                            <div class="flex">
-                              <div class="flex-shrink-0">
-                                <img class="iconLoan" src="./img/icons8-loan-68.png" alt="">
-                              </div>
-                              <div class="success-prompt-wrap">
-                                <p class="success-prompt-heading">Loans
-                                </p><div class="success-prompt-prompt ">
-                                  <p>you have not applied for a loan. There is no information to consult</p>
-                                </div>
-                                
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                    </template>
-                </div>
-		</main>
-		<footer>
-			<p>Hoal esto es un ejemplo</p>
-		</footer>
-		<!-- MAIN -->
-	</section>
-	<!-- CONTENT -->
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

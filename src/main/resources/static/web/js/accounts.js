@@ -25,10 +25,10 @@ const app = createApp( {
      methods: {
          async getData(){
                     try{
-                        this.params=new URLSearchParams(location.search)
+                        /*this.params=new URLSearchParams(location.search)
                         this.id= this.params.get("id");  
-                        console.log(this.id) 
-                        axios.get('http://localhost:8080/api/clients/'+ this.id)
+                        console.log(this.id) */
+                        axios.get('http://localhost:8080/api/clients/1')
                         .then(elemento => {    
                         console.log(elemento.data)                   
                         this.client=elemento.data                     
