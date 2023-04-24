@@ -25,7 +25,7 @@ const app = createApp( {
                         /*this.params=new URLSearchParams(location.search)
                         this.id= this.params.get("id");  
                         console.log(this.id) */
-                        axios.get('http://localhost:8080/api/clients/1')
+                        axios.get('/api/clients/current')
                         .then(elemento => {    
                         console.log(elemento.data)                   
                         this.client=elemento.data 
@@ -43,6 +43,14 @@ const app = createApp( {
                      }catch{
                         console.log(err)
                      }
+                },
+                logOut(){
+                    console.log("Hola")
+                    axios.post('/api/logout')
+                    .then(response =>{
+                        window.location.href='/web/index.html'
+                    })
+                    .cath(console.log("err"))
                 },
                 cardNumberMatrix(){
                     this.cards.forEach(card => {

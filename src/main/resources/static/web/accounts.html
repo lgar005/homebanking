@@ -15,6 +15,7 @@
     <title>Accounts</title>
 </head>
 <body>
+    <div  id="app">
     <header>
         <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid ">
@@ -31,13 +32,14 @@
                     <div class="navbar-nav nav_a d-flex align-items-center">
                         <a class="nav-link estileA" href="#">Accounts</a>
                         <a class="nav-link estileA" href="./cards.html">Cards</a>
+                        <!--<input  type="button" @click="logOut" value="sign out">-->
+                        <a class="nav-link estileA"type="button" @click="logOut">Sign out</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <main id="app">
-        
+    <main >
         <div class="d-flex justify-content-center pt-5  accountCardResponsive">
         <div class="card mr-10">
             <div class="card-title">Account Holder</div>
@@ -62,19 +64,14 @@
             </ul>
         </div>
         
-        <div class="infoAcounts">
+        <div class="infoAcounts d-flex flex-column justify-content-center">
             <h2 class="colorTitles text-center">Welcome {{client.firstName}}</h2>
             <p class="text-center colorTitles">we are happy to see you!</p>
             <p class="text-center colorTitles">Here you will find information about your accounts</p>
             <div class="d-flex justify-content-around mt-5">
-                <p class="colorTitles">Nº Accounts: </p>
-                <p class="colorTitles">Total Balance:  </p>
+                <p class="colorTitles">Nº Accounts: {{accounts.length}}</p>
+                <p class="colorTitles">Total Balance:   {{totalAccounts}}</p>
             </div>
-            <div class="d-flex justify-content-around">
-                <p>{{accounts.length}}</p>
-                <p> {{totalAccounts}}</p>
-            </div>
-           
         </div>
         </div>
 
@@ -86,29 +83,31 @@
             <div class="d-flex justify-content-center">
                 <img class="walletIcon" src="./img/iconBilletera.png" alt="incon-wallet">
             </div>
-            <div class="data d-flex flex-column justify-content-around">
-                <div class="d-flex  iconos pt-3 ">
-                    <i class='fas fa-fingerprint px-2' style='font-size:24px'></i>
+            <div class="data d-flex flex-column justify-content-around px-2">
+                <div class="d-flex   pt-3 ">
+                    <i class='fas fa-fingerprint px-2 iconos' style='font-size:24px'></i>
                     <p>
                         Number: {{account.number}}
                        
                     </p>
                 </div>
-                <div class="d-flex iconos pt-3">
-                    <i class='far fa-calendar-alt px-2' style='font-size:30px'></i>
+                <div class="d-flex  pt-3">
+                    <i class='far fa-calendar-alt px-2 iconos' style='font-size:30px'></i>
                     <p>
                         Date: {{account.creationDate}}
                     </p>
                 </div>
-                <div class="d-flex iconos pt-3 pb-3 " >
-                    <i class='bx bxs-dollar-circle px-2' style='font-size:30px'></i>
+                <div class="d-flex pt-3 pb-3 " >
+                    <i class='bx bxs-dollar-circle px-2  iconos' style='font-size:30px'></i>
                     <p>
                         Balance: {{account.balance}}
                     </p>
                 </div>
             </div>
-    
-            <a :href="'./account.html?id='+account.id" class="btn colorButton ">Transactions</a>
+            <div class="d-flex buttonCardsTransactions justify-content-center">
+                <a :href="'./account.html?id='+account.id" class="btn colorButton ">Transactions</a>
+            </div>
+            
         </div>
         
         </div>
@@ -169,42 +168,165 @@
             </template>
         </div>
     </main>
-    <footer class="d-flex justify-content-evenly flex-wrap pt-5">
-        <section class="d-flex flex-column justify-content-start mt-3 redes">
-            <h4 class="text_footer d-flex align-self-center">Social networks</h4>
-            <ul class="social d-flex align-items-start flex-column">
-                <li class="fa-brands fa-instagram">
-                    <a href="https://www.instagram.com">Instagram</a>
-                </li>
-                <li class="fa-brands fa-facebook">
-                    <a href="https://www.facebook.com">Facebook</a>
-                </li>
-                <li class="fa-brands fa-whatsapp">
-                    <a href="https://www.whatsapp.com">Whatsapp</a>
-                </li>
-                <li class="fa-brands fa-youtube">
-                    <a href="https://youtube.com">Youtube</a>
-                </li>
-            </ul>
-        </section>
-        <section class="d-flex flex-column align-items-center justify-content-start horarioC">
-            <ul class="social d-flex align-items-start flex-column" style="list-style: none;">
-                <h4 class="text_footer d-flex">location</h4>
-                <li><h5 class="horario"> Address: Cl. 36 #7 - 47.</h5></li>
-                <li><h5 class="horario"> Schedule: <br> Monday to Friday: 7:00 to 19:00. <br>
-                    Saturday: 8:00 to 17:00. <br> Sunday: 9:00 to 13:00</h5></li>
-            </ul>
-        </section>
-    </footer>
+    
 
-   
+    <!-- Footer -->
+    <footer class=" text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com" role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/" role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+  
+       
+  
+        <!-- Instagram -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com" role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://co.linkedin.com/" role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+  
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/lgar005" role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+  
+  
+      <!-- Section: Text -->
+      <section class="mb-4">
+        <p>
+            We provide quality services to ensure your financial well-being.
+            we have at our disposal a dedicated and passionate team ready to accompany you when you need it most.
+        </p>
+      </section>
+      <!-- Section: Text -->
+  
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h6>Founders</h6>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Carla Ramírez</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Diego Correa</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Antonio Casas</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Maria González </a>
+              </li>
+            </ul>
+          </div>
+
+          
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h6>Services</h6>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Loans</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Transactions</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Financial advice</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Safety deposit boxes</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h6 >Bank branches</h6>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Nueva York</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Ottawa</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">London</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Oklahoma</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h6>Contact us</h6>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">New York, NY 10012, US</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">mindhubBrothes@gmail.com</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white"> + 01 234 567 88</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">+ 01 234 567 89</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 50 years of experience in the financial market
+      
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+</div> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./js/menu.js"></script>
     <script src="./js/accounts.js"></script>
 </body>
 </html>

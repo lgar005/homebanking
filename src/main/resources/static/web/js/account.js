@@ -34,6 +34,14 @@ const app=createApp({
                 console.log(err)
             }
         },
+        logOut(){
+            console.log("Hola")
+            axios.post('/api/logout')
+            .then(response =>{
+                window.location.href='/web/index.html'
+            })
+            .cath(console.log("err"))
+        },
         amountFormat(){
             this.transactions.forEach(element => {
                 element.amount = element.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })

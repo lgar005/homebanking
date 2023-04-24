@@ -2,10 +2,12 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,6 +20,8 @@ import static com.fasterxml.jackson.core.io.NumberInput.parseLong;
 @SpringBootApplication
 public class HomebankingApplication {
 
+	@Autowired
+	private PasswordEncoder passwordEnconder;
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
@@ -26,12 +30,15 @@ public class HomebankingApplication {
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of client
-			Client client1=new Client("Melba", "Morel"," melba@mindhub.com");
-			Client client2=new Client("Manuel", "Casas"," manuelC@mindhub.com");
-			Client client3=new Client("Carla", "Palacios"," carla@mindhub.com");
+
+			Client client1=new Client("Melba", "Morel","melba@mindhub.com", passwordEnconder.encode("1234"));
+			Client client2=new Client("Manuel", "Casas","manuelC@mindhub.com", passwordEnconder.encode("4567"));
+			Client client3=new Client("Carla", "Palacios","carla@mindhub.com", passwordEnconder.encode("8910") );
+			Client admin= new Client("admin", "admin", "admin@bankAdmin.com", passwordEnconder.encode("1112"));
 			clientRepository.save(client1);
 			clientRepository.save(client2);
 			clientRepository.save(client3);
+			clientRepository.save(admin);
 			//date 1
 			LocalDateTime dateCreatedMelva=LocalDateTime.now().plusDays(1);
 			DateTimeFormatter fmt = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);

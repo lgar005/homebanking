@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+main{
+    background-color:  #f7e8ff !important;
+}
+.colorButton{
+    background-color: #734a91;
+    color: white;
+}
+.logo{
+    background-color: #734a91;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.sizeLogo{
+    height: 60px;
+}
+@media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+}

@@ -1,0 +1,81 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+header{
+    min-height: 18vh;
+    background: #734a91;
+    font-family: 'Merienda One', cursive;
+    /*#79589F*/
+ }
+ .logoHeader{
+   height: 50px;
+   width: 50px;
+   object-fit: cover;
+ }
+ .titleMB{
+   color: white;
+   
+   height: 45px;
+   display: flex;
+   align-items: end;
+ }
+ .fondo{
+    background-color: white;
+ }
+ main{
+    min-height: 52vh;
+    background-color:  #f7e8ff;
+    font-family: 'Merienda One', cursive;
+  }
+.estileA{
+  color: white;
+}
+.building{
+  height: 350px;
+  width: 400px;
+  object-fit: cover;
+}
+.infoAboutUs{
+  width: 600px;
+} 
+footer{
+    min-height: 30vh;
+    background: #734a91 !important;
+    font-family: 'Merienda One', cursive !important;
+    font-size:xx-small;
+    
+}
+@media (max-width:650px){
+ /* .sizeCards{
+    display: flex;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: small;
+  }*/
+} 
+@media (max-width:768px){
+  .building{
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+  }
+  .infoAboutUs{
+    width: 300px;
+    font-size: small;
+  }
+  .sizeResponsiveInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+}   
+@media (max-width:500px){
+  .titleMB{
+    display: none;
+  }
+}

@@ -20,6 +20,7 @@ const app = createApp( {
     },
     created(){
             this.getData()
+          
 
     },
      methods: {
@@ -28,7 +29,7 @@ const app = createApp( {
                         /*this.params=new URLSearchParams(location.search)
                         this.id= this.params.get("id");  
                         console.log(this.id) */
-                        axios.get('http://localhost:8080/api/clients/1')
+                        axios.get('/api/clients/current')
                         .then(elemento => {    
                         console.log(elemento.data)                   
                         this.client=elemento.data                     
@@ -50,10 +51,19 @@ const app = createApp( {
                         console.log(err)
                      }
                 },
+                logOut(){
+                    console.log("Hola")
+                    axios.post('/api/logout')
+                    .then(response =>{
+                        window.location.href='/web/index.html'
+                    })
+                    .cath(console.log("err"))
+                }, 
                 balanceFormat(){
                     this.accounts.forEach(element => {
                         element.balance = element.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
                         element.creationDate=element.creationDate.toString().replace('T', ' ')
+                        //element.creationDate=element.creationDate.slice(0,-1)
                         
                     })
                 },
@@ -61,12 +71,10 @@ const app = createApp( {
                     this.loans.forEach(loan=>{
                         loan.amount=loan.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
                     })
-                }    
+                },
+                   
         },
 
-    computed : {
-
-
-    }
+    
 })
 app.mount('#app')
