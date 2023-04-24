@@ -30,9 +30,10 @@ public class WebAuthorization  {
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/rest/**").hasAuthority("ADMIN")
                 .antMatchers("/h2-console").hasAuthority("ADMIN")
-                .antMatchers("web/accounts.html").hasAuthority("CLIENT")
-                .antMatchers("web/account.html").hasAuthority("CLIENT")
-                .antMatchers("web/cards.html").hasAuthority("CLIENT");
+                .antMatchers("/web/manager.html").hasAuthority("ADMIN")
+                .antMatchers("/web/accounts.html").hasAuthority("CLIENT")
+                .antMatchers("/web/account.html").hasAuthority("CLIENT")
+                .antMatchers("/web/cards.html").hasAuthority("CLIENT");
 
 
         http.formLogin()

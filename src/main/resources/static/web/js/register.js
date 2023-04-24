@@ -26,7 +26,12 @@ const app=createApp({
                 this.postLogin()
             })
             .catch(function (error) {
-                console.log(error.toJSON().status);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Check that the information entered is correct!',
+                   
+                  })
             })
                 
         },

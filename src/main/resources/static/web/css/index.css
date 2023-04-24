@@ -29,8 +29,29 @@ header{
     background-color:  #f7e8ff;
     font-family: 'Merienda One', cursive;
   }
+  .left{
+    color: rgb(20, 20, 20);
+    font-weight: 600;
+  
+}
+.right{
+    color: rgb(12, 12, 12);
+    font-weight: 600;
+}
+.carousel-control-next, .carousel-control-prev {
+  position: relative;
+
+}
+#navbarNav{
+  flex-grow: 0 !important;
+}  
 .estileA{
   color: white;
+}
+.cardImage{
+  height: 13rem;
+   
+  object-fit: cover;
 }
 .building{
   height: 350px;

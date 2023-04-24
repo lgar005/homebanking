@@ -4,7 +4,7 @@ const app=createApp({
     data(){
         return {
             email: '',
-            password:''
+            password:'',
         }
     },
    
@@ -15,19 +15,16 @@ const app=createApp({
                 window.location.href='/web/accounts.html'
             })
             .catch(function (error) {
-                console.log(error.toJSON().status);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Incorrect password or email!',
+                   
+                  })
+                
             })
-          },
+        },
         
     }
 })
 app.mount('#app')
-/**
- * Change the error message
- */
-document.getElementById("email").onchange = function() {
-    this.setCustomValidity('');
-};
-document.getElementById("email").oninvalid = function() {
-    this.setCustomValidity("Merci d'indiquer votre adresse email!");
-};
