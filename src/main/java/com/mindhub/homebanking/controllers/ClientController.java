@@ -55,11 +55,14 @@ public class ClientController {
         if (clientRepository.findByEmail(email) !=  null) {
             return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
         }
+        String rNumber=null;
+        do{
+            int randomNumber =  (int) (Math.random() * 1500) + 1;
+            rNumber="VIN"+String.valueOf(randomNumber);
+        }while(accountRepository.findByNumber(rNumber)!=null);
         Client client=new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientRepository.save(client);
-        int randomNumber =  (int) (Math.random() * 500) + 1;
-        String rNumber=String.valueOf(randomNumber);
-        Account account=new Account("VIN"+rNumber, LocalDateTime.now() ,0);
+        Account account=new Account(rNumber, LocalDateTime.now() ,0.0);
         client.addAccount(account);
         accountRepository.save(account);
         return new ResponseEntity<>(HttpStatus.CREATED);
