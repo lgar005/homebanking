@@ -15,6 +15,7 @@ const app=createApp({
                 window.location.href='/web/accounts.html'
             })
             .catch(function (error) {
+                console.log(error)
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',

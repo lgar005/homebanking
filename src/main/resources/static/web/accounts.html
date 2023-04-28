@@ -68,17 +68,32 @@
             <h2 class="colorTitles text-center">Welcome {{client.firstName}}</h2>
             <p class="text-center colorTitles">we are happy to see you!</p>
             <p class="text-center colorTitles">Here you will find information about your accounts</p>
-            <div class="d-flex justify-content-around mt-5">
+            <div class="d-flex justify-content-around mt-5 numberAccountsResponsive">
                 <p class="colorTitles">Nº Accounts: {{accounts.length}}</p>
                 <p class="colorTitles">Total Balance:   {{totalAccounts}}</p>
             </div>
         </div>
         </div>
 
-        <h1 class="text-center colorTitles">Your accounts</h1>
-
-       
-        <div class="d-flex flex-row gap-5 w-100 justify-content-center accountCardResponsive  pt-3 pb-5">
+        <!--<div class="d-flex justify-content-evenly align-items-center  pt-5 ver">
+          <p v-show="accounts.length<3" class="colorTitles">Create a new account now. Remember that you can have a maximum of three accounts: </p>
+          <button class="buttonCreateAccount" type="button" @click="createAccount" v-show="accounts.length<3">Create Account</button>
+        </div>-->
+        <template v-if="accounts.length<3">
+          <div class="d-flex  d-flex justify-content-center align-items-center">
+          <p  class="colorTitles">Create a new account now. Remember that you can have a maximum of three accounts: </p>
+          <button class="buttonCreateAccount" type="button" @click="createAccount">Create Account</button>
+        </div>
+        </template>
+        <template v-else-if="loading">
+          <h6>loading...</h6>
+        </template>
+        <template v-else>
+           
+        </template>
+        <h1 class="text-center colorTitles pt-3">Your accounts</h1>
+        <!--d-flex flex-row gap-5 w-100 justify-content-center accountCardResponsive  pt-3 pb-5-->
+        <div class="d-flex flex-wrap  gap-5 justify-content-center pb-5 pt-3">
         <div class="accountCard "  v-for="account of accounts">   
             <div class="d-flex justify-content-center">
                 <img class="walletIcon" src="./img/iconBilletera.png" alt="incon-wallet">
@@ -326,6 +341,7 @@
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./js/accounts.js"></script>
 </body>

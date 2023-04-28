@@ -50,10 +50,16 @@ public class ClientController {
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("All fields are required", HttpStatus.FORBIDDEN);
+        }
+        if(!firstName.matches("^[a-zA-Z]*$") ){
+            return new ResponseEntity<>("First name is not valid. The name can only contain letters", HttpStatus.FORBIDDEN);
+        }
+        if(!lastName.matches("^[a-zA-Z]*$")){
+            return new ResponseEntity<>("Last name is not valid. The name can only contain letters", HttpStatus.FORBIDDEN);
         }
         if (clientRepository.findByEmail(email) !=  null) {
-            return new ResponseEntity<>("Name already in use", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
         String rNumber=null;
         do{

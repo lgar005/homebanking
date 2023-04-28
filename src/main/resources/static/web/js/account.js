@@ -28,19 +28,35 @@ const app=createApp({
                     this.transactions=this.account.transactions.sort((x,y)=>y.id-x.id)
                     this.amountFormat();
                     this.account.balance=this.account.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
-                    this.account.creationDate=this.account.creationDate.toString().replace('T', ' ');
+                    this.account.creationDate=this.account.creationDate.slice(0,10);
                 })
             }catch(err){
                 console.log(err)
             }
         },
         logOut(){
-            console.log("Hola")
-            axios.post('/api/logout')
+            /*axios.post('/api/logout')
             .then(response =>{
                 window.location.href='/web/index.html'
             })
-            .cath(console.log("err"))
+            .cath(console.log("err"))*/
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to log out?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log out!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/logout')
+                    .then(response =>{
+                        window.location.href='/web/index.html'
+                    })
+                    .cath(console.log("err"))
+                }
+              })
         },
         amountFormat(){
             this.transactions.forEach(element => {

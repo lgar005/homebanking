@@ -24,6 +24,8 @@ public class WebAuthorization  {
                 .antMatchers("/web/index.html").permitAll()
                 .antMatchers("/web/css/**").permitAll()
                 .antMatchers("/web/js/**").permitAll()
+                .antMatchers("/web/register.html").permitAll()
+                .antMatchers("/web/login.html").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers("/api/logout").permitAll()
@@ -32,8 +34,11 @@ public class WebAuthorization  {
                 .antMatchers("/h2-console").hasAuthority("ADMIN")
                 .antMatchers("/web/manager.html").hasAuthority("ADMIN")
                 .antMatchers("/web/accounts.html").hasAuthority("CLIENT")
+                .antMatchers("/api/clients/current/accounts").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST,"/api/clients/current/cards").hasAuthority("CLIENT")
                 .antMatchers("/web/account.html").hasAuthority("CLIENT")
-                .antMatchers("/web/cards.html").hasAuthority("CLIENT");
+                .antMatchers("/web/cards.html").hasAuthority("CLIENT")
+                .antMatchers("/web/create-cards.html").hasAuthority("CLIENT");
 
 
         http.formLogin()

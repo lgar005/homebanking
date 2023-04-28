@@ -83,6 +83,7 @@ body {
   top: 20%;
   left: 20%;
   transform: translate(-50%, -50%);*/
+  margin-bottom: 2rem;
 }
 .cardT {
   width: 350px;
@@ -363,12 +364,73 @@ body {
   }
 
 .containerCards{
-  display: flex;
-  justify-content: center;
+  /*display: flex;
+  justify-content: space-around !important;
+  align-content: space-around !important; 
+  flex-wrap: wrap;
+  background-color: red;*/
+  height: 800px;
+  background-color: red;
+}
+.spaceCard{
+  padding-bottom: 15rem !important;
+}
+.colorCard{
+  background-color: aliceblue;
+  border-color: royalblue;
+}
+.imgForm{
+  width: 320px;
+  height: 165px;
+  object-fit: cover;
+}
+.colorButton{
+  background-color: #734a91;
+  color: white;
+}
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  
+  width: 100%;
+  height: 40px;
+}
+select {
+  display: none;
 }
 .titlesCardsDC{
   text-align:center;
   color: #734a91;
+}
+.buttonCreateCard {
+  position: relative;
+  display: inline-block;
+  margin: 12px;
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color:#734a91;
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid #734a91;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 0 #734a91;
+}
+.buttonCreateCard:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0 #734a91;
+}
+
+.buttonCreateCard:active {
+  transform: scale(0.9);
+}
+.buttonCard{
+  
 }
 footer{
   min-height: 30vh;
@@ -390,5 +452,43 @@ footer{
   @media (max-width:500px){
   .titleMB{
     display: none;
+  }
+}
+@media (max-width:800px) {
+  .parentCardContainer{
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+@media (max-width:580px) {
+  .notifications-container {
+    width: auto;
+  }
+  .buttonCreateCard {
+    font-size: small;
+     margin: 10px;
+     padding: 10px 20px;
+  }
+ 
+}
+@media (min-width:801px) and (max-width:1250px) {
+  .notifications-container {
+    height: auto;
+    width: auto;
+  }
+  .buttonCreateCard {
+    font-size: small;
+     margin: 10px;
+     padding: 10px 20px;
+  }
+ 
+}
+@media (max-width:350px) {
+  .end-date {
+    font-size: 9px;
+  }
+  .cardT-holder {
+    font-size:9px;
   }
 }

@@ -14,21 +14,17 @@ const app = createApp( {
              percentages:[ ],
              loans:[ ],
              loading:true,
-             numberLoans:0
+             numberLoans:0,
 
         }
     },
     created(){
             this.getData()
-          
-
     },
      methods: {
          async getData(){
                     try{
-                        /*this.params=new URLSearchParams(location.search)
-                        this.id= this.params.get("id");  
-                        console.log(this.id) */
+                     
                         axios.get('/api/clients/current')
                         .then(elemento => {    
                         console.log(elemento.data)                   
@@ -52,18 +48,67 @@ const app = createApp( {
                      }
                 },
                 logOut(){
-                    console.log("Hola")
-                    axios.post('/api/logout')
+                    /*axios.post('/api/logout')
                     .then(response =>{
                         window.location.href='/web/index.html'
                     })
-                    .cath(console.log("err"))
-                }, 
+                    .cath(console.log("err"))*/
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Do you want to log out?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, log out!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            axios.post('/api/logout')
+                            .then(response =>{
+                                window.location.href='/web/index.html'
+                            })
+                            .cath(console.log("err"))
+                        }
+                      })
+                },
+                createAccount(){
+                   /* console.log("crear")
+                    axios.post('/api/clients/current/accounts')
+                    .then(response =>{
+                        window.location.reload();
+                    })
+                    .cath(console.log("err"))*/
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Do you want to create a new account?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, create it!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            axios.post('/api/clients/current/accounts')
+                            .then(response =>{
+                                Swal.fire({
+                                    title:'Created!',
+                                    text:'Your account has been created.',
+                                    icon:'success',
+                                    didOpen:()=>{
+                                        document.querySelector('.swal2-confirm').addEventListener('click', () =>{location.reload(true)})
+                                    }
+                                })
+                                
+                            })
+                            .cath(console.log("err")) 
+                        }
+                      })
+                },   
                 balanceFormat(){
                     this.accounts.forEach(element => {
                         element.balance = element.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
-                        element.creationDate=element.creationDate.toString().replace('T', ' ')
-                        //element.creationDate=element.creationDate.slice(0,-1)
+                        //element.creationDate=element.creationDate.toString().replace('T', ' ')
+                        element.creationDate=element.creationDate.slice(0,10)
                         
                     })
                 },
