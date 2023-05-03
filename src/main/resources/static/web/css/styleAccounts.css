@@ -441,8 +441,10 @@ table td{
 .buttonCreateAccount:active {
   transform: scale(0.9);
 }
-.ver{
-
+.active {
+	border-bottom: 2px solid #e7d49e;
+	max-width: fit-content;
+	height: 45px;
 }
 footer{
 min-height: 30vh;

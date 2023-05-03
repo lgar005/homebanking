@@ -21,7 +21,7 @@ public class WebAuthorization  {
     public SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 
-                .antMatchers("/web/index.html").permitAll()
+                .antMatchers( "/web/index.html").permitAll()
                 .antMatchers("/web/css/**").permitAll()
                 .antMatchers("/web/js/**").permitAll()
                 .antMatchers("/web/register.html").permitAll()

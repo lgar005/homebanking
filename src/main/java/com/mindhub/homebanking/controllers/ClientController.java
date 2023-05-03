@@ -49,8 +49,17 @@ public class ClientController {
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            return new ResponseEntity<>("All fields are required", HttpStatus.FORBIDDEN);
+       if(firstName.isBlank()){
+           return new ResponseEntity<>("The first name is required", HttpStatus.FORBIDDEN);
+       }
+        if(lastName.isBlank()){
+            return new ResponseEntity<>("The last name is required", HttpStatus.FORBIDDEN);
+        }
+        if(email.isBlank()){
+            return new ResponseEntity<>("The email is required", HttpStatus.FORBIDDEN);
+        }
+        if(password.isBlank()){
+            return new ResponseEntity<>("The password is requirede", HttpStatus.FORBIDDEN);
         }
         if(!firstName.matches("^[a-zA-Z]*$") ){
             return new ResponseEntity<>("First name is not valid. The name can only contain letters", HttpStatus.FORBIDDEN);
@@ -63,7 +72,7 @@ public class ClientController {
         }
         String rNumber=null;
         do{
-            int randomNumber =  (int) (Math.random() * 1500) + 1;
+            int randomNumber =  (int) (Math.random() * 10000000) + 1;
             rNumber="VIN"+String.valueOf(randomNumber);
         }while(accountRepository.findByNumber(rNumber)!=null);
         Client client=new Client(firstName, lastName, email, passwordEncoder.encode(password));

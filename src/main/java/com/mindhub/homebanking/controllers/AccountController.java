@@ -39,7 +39,7 @@ public class AccountController {
     }
 
    @RequestMapping("/api/clients/current/accounts")
-    public List<AccountDTO> getAccounts(Authentication authentication){
+    public List<AccountDTO> getAccountsClient(Authentication authentication){
          Client client=clientRepository.findByEmail(authentication.getName());
          return client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toList());
     }

@@ -31,12 +31,8 @@ public class CardController {
         ResponseEntity<Object> response=new ResponseEntity<>("undefined data", HttpStatus.FORBIDDEN);
         if(client!=null){
             if(client.getCards().stream().filter(card -> card.getType()==type && card.getColor()==color).collect(Collectors.toList()).size()==0){
-                int cvvC;
-                do {
-                     double cvv = 100+ Math.random() * 900;
-                     cvvC=(int)cvv;
-                }while (cardRepository.findByCvv(cvvC)!=null);
-
+                double cvv = 100+ Math.random() * 900;
+                int cvvC=(int)cvv;
                 String number="";
                 do{
                      number=generateNumber()+"-"+generateNumber()+"-"+generateNumber()+"-"+generateNumber();

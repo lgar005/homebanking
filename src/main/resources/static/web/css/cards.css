@@ -131,7 +131,8 @@ body {
   background-image: linear-gradient(to bottom, #efdbab, #e1cb94);
 }
 .SILVER{
-  background-image: linear-gradient(to bottom,#e3e4e5, #e3e4e5);
+  /*#e3e4e5, #e3e4e5*/
+  background-image: linear-gradient(to bottom,#bcbcbd, #bebebe);
 }
 .TITANIUM {
   background-image: linear-gradient(to bottom,  #57565c, #e3e4e5);
@@ -220,10 +221,12 @@ body {
   color: rgba(255,255,255,0.8);
 }
 .cardT-holder {
+  position: relative;
   margin: 10px 25px;
   text-transform: uppercase;
   font-family: 'cc font', monospace;
 }
+
 .master {
   position: absolute;
   right: 20px;
@@ -431,6 +434,9 @@ select {
 }
 .buttonCard{
   
+}
+textarea{
+  resize:none;
 }
 footer{
   min-height: 30vh;
