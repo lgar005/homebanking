@@ -7,6 +7,9 @@ import com.mindhub.homebanking.models.TransactionType;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,21 +26,23 @@ import java.time.format.FormatStyle;
 @Controller
 public class TransactionCotroller {
 
-    @Autowired
-    private ClientRepository clientRepository;
+   @Autowired
+   private ClientService clientService;
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
 
     @Transactional
     @PostMapping(path = "/api/transactions")
     public ResponseEntity<Object> makeTransaction(Authentication authentication, @RequestParam Double amount, @RequestParam String description,@RequestParam String originAccountNumber, @RequestParam String destinationAccountNumber){
-        Client client= clientRepository.findByEmail(authentication.getName());
-        Account originAccount=accountRepository.findByNumber(originAccountNumber);
-        Account destinationAccount=accountRepository.findByNumber(destinationAccountNumber);
+        Client client= clientService.getAuthenticatedClient(authentication);
+        //accountRepository.findByNumber(originAccountNumber)
+        Account originAccount=accountService.findByNumber(originAccountNumber);
+        //accountRepository.findByNumber(destinationAccountNumber)
+        Account destinationAccount=accountService.findByNumber(destinationAccountNumber);
         if(client==null){
             return  new ResponseEntity<>("The client was not found", HttpStatus.FORBIDDEN);
         }
@@ -75,8 +80,10 @@ public class TransactionCotroller {
             Transaction creditTransaction= new Transaction(TransactionType.CREDIT, amount, description+" "+ destinationAccountNumber, date1f);
             originAccount.addTransaction(debitTransaction);
             destinationAccount.addTransaction(creditTransaction);
-            transactionRepository.save(debitTransaction);
-            transactionRepository.save(creditTransaction);
+            //transactionRepository.save(debitTransaction);
+            transactionService.saveTransaction(debitTransaction);
+            //transactionRepository.save(creditTransaction);
+            transactionService.saveTransaction(creditTransaction);
             originAccount.setBalance(originAccount.getBalance()-amount);
             destinationAccount.setBalance(destinationAccount.getBalance()+amount);
             return new ResponseEntity<>("transaction ", HttpStatus.CREATED);

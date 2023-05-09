@@ -4,8 +4,8 @@ import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardColor;
 import com.mindhub.homebanking.models.CardType;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.CardRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.CardService;
+import com.mindhub.homebanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ import java.util.stream.Collectors;
 
 @RestController
 public class CardController {
+    @Autowired
+    private ClientService clientService;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private CardService cardService;
 
-    @Autowired
-    private CardRepository cardRepository;
     @PostMapping("/api/clients/current/cards")
     public ResponseEntity<Object> createCard(Authentication authentication, @RequestParam CardType type, @RequestParam CardColor color){
-        Client client=clientRepository.findByEmail(authentication.getName());
+        Client client=clientService.getAuthenticatedClient(authentication);
         ResponseEntity<Object> response=new ResponseEntity<>("undefined data", HttpStatus.FORBIDDEN);
         if(client!=null){
             if(client.getCards().stream().filter(card -> card.getType()==type && card.getColor()==color).collect(Collectors.toList()).size()==0){
@@ -36,10 +36,10 @@ public class CardController {
                 String number="";
                 do{
                      number=generateNumber()+"-"+generateNumber()+"-"+generateNumber()+"-"+generateNumber();
-                }while (cardRepository.findByNumber(number)!=null);
+                }while (cardService.findByNumber(number)!=null);
                 Card card= new Card(client.getFirstName()+" "+client.getLastName(),type,color,number,cvvC, LocalDateTime.now(), LocalDateTime.now().plusYears(5));
                 client.addCard(card);
-                cardRepository.save(card);
+                cardService.saveCard(card);
                 response=new ResponseEntity<>(HttpStatus.CREATED);
             } else if (client.getCards().stream().filter(card -> card.getType()==type && card.getColor()==color).collect(Collectors.toList()).size()!=0) {
                 response=new ResponseEntity<>("You have a card with these characteristics. Acquire a different card.", HttpStatus.FORBIDDEN);

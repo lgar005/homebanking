@@ -4,112 +4,93 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transfers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
-          <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
+          <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet"> 
-    <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./css/cards.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>   
+   <link rel="stylesheet" href="./css/cards.css">
+    <title>Loan-application</title>
 </head>
 <body>
-  <div id="app">
-    <header>
-        <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid ">
-                <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img class=" logoHeader " src="./img/MLogo-removebg-preview.png" alt="Logo"/>
-                    <p class="titleMB px-2"> Mindhub Brothers</p>
-                </a>
-                <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end align-items-center"
-                    id="navbarNav">
-                    <div class="navbar-nav nav_a d-flex align-items-center">
-                        <a class="nav-link estileA" href="./accounts.html">Accounts</a>
-                        <a class="nav-link estileA" href="./cards.html">Cards</a>
-                        <a class="nav-link estileA" href="#">Transfers</a>
-                        <a class="nav-link estileA"type="button" @click="logOut">Sign out</a>
+    <div id="app">
+      {{quotaValue}}
+        <header>
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid ">
+                    <a class="navbar-brand d-flex align-items-center" href="#">
+                        <img class=" logoHeader " src="./img/MLogo-removebg-preview.png" alt="Logo"/>
+                        <p class="titleMB px-2"> Mindhub Brothers</p>
+                    </a>
+                    <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end align-items-center"
+                        id="navbarNav">
+                        <div class="navbar-nav nav_a d-flex align-items-center">
+                            <a class="nav-link estileA" active href="./accounts.html">Accounts</a>
+                            <a class="nav-link estileA" href="./cards.html">Cards</a>
+                            <!--<input  type="button" @click="logOut" value="sign out">-->
+                            <a class="nav-link estileA" href="./transfers.html">Transfers</a>
+                            <a class="nav-link estileA"type="button" @click="logOut">Sign out</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        
+            </nav>
+        </header>
+        <main>
             <section class="h-100 h-custom" >
                 <div class="container py-5 h-100">
                   <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-lg-8 col-xl-6">
-                      <div class="card rounded-3">
-                    
-                          <img src="./img/transaction3.png"class="w-100 imgForm" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                      <div class="card rounded-3">            
+                          <img src="./img/loanImage.png"class="w-100 imgForm" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
                           alt="Sample photo">
                         <div class="card-body p-4 p-md-5">
-                          <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Make Transfers</h3>
+                          <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Apply for loan</h3>
               
                           <form class="px-md-2">
                             
-                            <label for="">Originating account number:</label>
+                            <label for="">Type of loan and Max Amount:</label>
                             <div class="mb-4 pt-2">
-                                <select class="select"  v-model="originAccountNumber">
-                                    <option  v-for="account of accounts"  v-bind:value="account.number">{{account.number}}  - Balance: {{account.balance}} </option>
+                                <select class="select"  v-model="loan"  @change="paymentsAccordingLoan">
+                                    <option  v-for="loan of loans"  v-bind:value="loan.id">{{loan.name}} -{{loan.maxAmount}}  </option>
                                 </select>
                 
                             </div>
 
-                            <!---->
-                            <template v-for="account of  chooseAD">
-                                <div class="form-check form-check-inline pb-3">
-                                  <label class="form-check-label">
-                                    <input class="form-check-input "  @change="filterCheck" v-model="checked" type="radio"  :value='account'>
-                                    {{account}}
-                                  </label>
-                                </div>
-                              </template>
-
-                    
-                            
-                           <template  v-if="ownAccount==true">
-                                <label for="">Destination account number: </label>
-                                <div class="mb-4">
-                                    <select class="select" v-model="destinationAccountNumber">
-                                        <option  v-for="account of accounts"  v-bind:value="account.number">{{account.number}}</option>
-                                    </select>
-                
-                                </div>
-                            </template>
-                            <template v-else-if="ownAccount==false">
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example1q">Destination account number: </label>
-                                    <input type="text" id="form3Example1q" class="form-control" v-model="destinationAccountNumber"/>
-                                </div>
-                            </template>
-                            <template v-else>
-                                <p>Please select an option</p>
-                            </template>
-                           
-                            
-                            
-
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example1q">Amount to transfer: </label>
+                                <label class="form-label" for="form3Example1q">Amount: </label>
                                 <input type="number" id="form3Example1q" class="form-control" v-model="amount"/>
                             </div>
-              
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form4Example1q">Description: </label>
-                                <!--<input type="text" id="form3Example1q" class="form-control" v-model="description"/>-->
-                                <textarea name="description" id="form4Example1q" cols="30" rows="4"  class="form-control" v-model="description"></textarea>
+
+                           <label for="">Payments:</label>
+                            <div class="mb-4 pt-2">
+                                <select class="select"  v-model="payment" @change="quotaValue">
+                                    <option  v-for="payment in payments"  v-bind:value="payment"> {{payment}}  </option>
+                                </select>
+                
                             </div>
-                        
-              
-                            <button type="button" class="btn colorButton btn-lg mb-1" @click="makeTransaction">Transfer</button>
+                           
+                            <label for="">Destination account number: </label>
+                            <div class="mb-4">
+                                <select class="select" v-model="destinationAccountNumber">
+                                    <option  v-for="account of accounts"  v-bind:value="account.number">{{account.number}}</option>
+                                </select>
+            
+                            </div>
+                            <template v-if="payment!='' && amount!=''">
+                              <div class="infoLoan">
+                                <p >You have just selected a loan from ${{amount}} and you have to pay it back in {{payment}} quota.
+                                  The value of each installment is  {{quota}}
+                                </p>
+                              </div>
+                              
+                            </template>  
+                            <button type="button" class="btn colorButton btn-lg mb-1"  @click="applyForLoan">Apply</button>
               
                           </form>
               
@@ -119,10 +100,9 @@
                   </div>
                 </div>
               </section>
-        </div>
-    </main>
-     <!-- Footer -->
-     <footer class=" text-center text-white">
+        </main>
+         <!-- Footer -->
+    <footer class=" text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
           <!-- Section: Social media -->
@@ -172,7 +152,7 @@
             <div class="row">
               <!--Grid column-->
               <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h6 >Founders</h6>
+                <h6>Founders</h6>
       
                 <ul class="list-unstyled mb-0">
                   <li>
@@ -195,7 +175,7 @@
       
               <!--Grid column-->
               <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h6 >Services</h6>
+                <h6>Services</h6>
       
                 <ul class="list-unstyled mb-0">
                   <li>
@@ -237,7 +217,7 @@
       
               <!--Grid column-->
               <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h6 >Contact us</h6>
+                <h6>Contact us</h6>
       
                 <ul class="list-unstyled mb-0">
                   <li>
@@ -265,17 +245,19 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
           © 50 years of experience in the financial market
-          <!--<a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>-->
+          
         </div>
         <!-- Copyright -->
       </footer>
       <!-- Footer -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./js/transfer.js"></script>
+    <script src="./js/loan-application.js"></script>
 </body>
 </html>

@@ -438,6 +438,11 @@ select {
 textarea{
   resize:none;
 }
+.infoLoan{
+  background-color: rgb(240 253 244);
+  border-radius: 0.5rem;
+  border-color:  rgb(74 222 128);;
+}
 footer{
   min-height: 30vh;
   background: #734a91 !important;

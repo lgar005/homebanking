@@ -113,13 +113,13 @@ public class HomebankingApplication {
 			accountRepository.save(account5);
 
 			List<Integer> payments1 = List.of(12,24,36,48,60);
-			Loan loan1= new Loan("Mortgage Loan", 500000, payments1);
+			Loan loan1= new Loan("Mortgage Loan", 500000, payments1,0.17);
 
 			List<Integer> payments2= List.of(6,12,24);
-			Loan loan2= new Loan("Personal Loan", 100000,payments2 );
+			Loan loan2= new Loan("Personal Loan", 100000,payments2, 0.24 );
 
 			List<Integer> payments3= List.of(6,12,24,36);
-			Loan loan3= new Loan("Automotive Loan", 300000, payments3);
+			Loan loan3= new Loan("Automotive Loan", 300000, payments3, 0.092);
 
 			loanRepository.save(loan1);
 			loanRepository.save(loan2);

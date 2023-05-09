@@ -17,6 +17,7 @@ public class Loan {
     private Long id;
     private String name;
     private double  maxAmount;
+    private double interest;
     @ElementCollection
     private List<Integer> payments;
 
@@ -24,10 +25,11 @@ public class Loan {
     private Set<ClientLoan> clientLoans= new HashSet<>();
     public Loan() {
     }
-    public Loan(String name, double maxAmount, List<Integer> payments) {
+    public Loan(String name, double maxAmount, List<Integer> payments, double interest) {
         this.name = name;
         this.maxAmount = maxAmount;
         this.payments = payments;
+        this.interest=interest;
     }
 
     public Long getId() {
@@ -60,6 +62,14 @@ public class Loan {
 
     public void setPayments(List<Integer> payments) {
         this.payments = payments;
+    }
+
+    public double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(double interest) {
+        this.interest = interest;
     }
 
     public void addClientLoan(ClientLoan clientLoan) {

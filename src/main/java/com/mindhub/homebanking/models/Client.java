@@ -20,7 +20,6 @@ public class Client {
     private String  password;
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Account> accounts= new HashSet<>();
-
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<ClientLoan> clientLoans= new HashSet<>();
     @OneToMany(mappedBy = "client", fetch=FetchType.EAGER)
