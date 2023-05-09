@@ -39,7 +39,8 @@ public class WebAuthorization  {
                 .antMatchers("/web/account.html").hasAuthority("CLIENT")
                 .antMatchers("/web/cards.html").hasAuthority("CLIENT")
                 .antMatchers("/web/create-cards.html").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST,"/api/transactions").hasAuthority("CLIENT");
+                .antMatchers(HttpMethod.POST,"/api/transactions").hasAuthority("CLIENT")
+                .antMatchers("/api/loans").hasAuthority("CLIENT");;
 
 
         http.formLogin()
