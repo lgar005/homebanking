@@ -20,13 +20,13 @@ import static com.fasterxml.jackson.core.io.NumberInput.parseLong;
 @SpringBootApplication
 public class HomebankingApplication {
 
-	@Autowired
-	private PasswordEncoder passwordEnconder;
+	/*@Autowired
+	private PasswordEncoder passwordEnconder;*/
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of client
@@ -160,7 +160,7 @@ public class HomebankingApplication {
 			cardRepository.save(card2);
 			cardRepository.save(card3);
 		};
-	}
+	}*/
 
 
 
