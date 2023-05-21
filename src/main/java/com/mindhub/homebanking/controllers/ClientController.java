@@ -2,6 +2,7 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
@@ -32,18 +33,18 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @RequestMapping("/api/clients")
+    @GetMapping("/api/clients")
     public List<ClientDTO> getClients(){
         return clientService.getClientsDTO();
     }
-    @RequestMapping("/api/clients/{id}")
+    @GetMapping("/api/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         //clientRepository.findById(id).map(client -> new ClientDTO(client)).orElse(null);
         return  clientService.getClientDTO(id);
 
     }
 
-    @RequestMapping("/api/clients/current")
+    @GetMapping("/api/clients/current")
     public ClientDTO getClient(Authentication authentication) {
        return clientService.getClientDTO(authentication);
     }
@@ -80,7 +81,7 @@ public class ClientController {
         Client client=new Client(firstName, lastName, email, passwordEncoder.encode(password));
         //clientRepository.save(client);
         clientService.saveClient(client);
-        Account account=new Account(rNumber, LocalDateTime.now() ,0.0);
+        Account account=new Account(rNumber, LocalDateTime.now() ,0.0, AccountType.SAVINGS);
         client.addAccount(account);
         accountRepository.save(account);
         return new ResponseEntity<>(HttpStatus.CREATED);

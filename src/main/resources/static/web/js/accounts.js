@@ -4,7 +4,7 @@ const app = createApp( {
     data(){
         return {
              accounts:[ ],
-             id:'',
+             //id:'',
              params:'',
              client:'',
              clients:[ ],
@@ -15,7 +15,13 @@ const app = createApp( {
              loans:[ ],
              loading:true,
              numberLoans:0,
-
+             accountType:'',
+             idclientLoan:'',
+             numberAccount:'',
+             amount:'',
+             quota:'',
+             quotaString:'',
+             loanSelect:''
         }
     },
     created(){
@@ -29,30 +35,26 @@ const app = createApp( {
                         .then(elemento => {    
                         console.log(elemento.data)                   
                         this.client=elemento.data                     
-                        this.accounts=this.client.accounts                        
+                        this.accounts=this.client.accounts.filter(account=>account.active)
+                        console.log(this.accounts)                        
                         this.balances=this.accounts.map(account=>account.balance)                        
                         this.numberAccounts=this.accounts.map(account=>account.number)
                         this.totalAccounts=this.balances.reduce((accumulator, currentValue)=>accumulator+=currentValue,0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })                     
                         this.percentages=this.balances.map(balance=>(balance*100)/this.totalAccounts)
                         this.numberLoans=this.client.loans.length
-                        this.loans=this.client.loans
+                        this.loans=this.client.loans.filter(loan=>loan.amountF>0)
                         console.log(this.loans)
                         this.balanceFormat();
                         this.loansFormat();
                         this.loading=false
-                        console.log(this.loading)
-                        console.log("loands")
+                        //console.log(this.loading)
+                        //console.log("loands")
                         })
                      }catch{
                         console.log(err)
                      }
                 },
                 logOut(){
-                    /*axios.post('/api/logout')
-                    .then(response =>{
-                        window.location.href='/web/index.html'
-                    })
-                    .cath(console.log("err"))*/
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Do you want to log out?",
@@ -72,12 +74,6 @@ const app = createApp( {
                       })
                 },
                 createAccount(){
-                   /* console.log("crear")
-                    axios.post('/api/clients/current/accounts')
-                    .then(response =>{
-                        window.location.reload();
-                    })
-                    .cath(console.log("err"))*/
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Do you want to create a new account?",
@@ -88,7 +84,7 @@ const app = createApp( {
                         confirmButtonText: 'Yes, create it!'
                       }).then((result) => {
                         if (result.isConfirmed) {
-                            axios.post('/api/clients/current/accounts')
+                            axios.post('/api/clients/current/accounts', `accountType=${this.accountType}`,{headers:{'content-type':'application/x-www-form-urlencoded'}})
                             .then(response =>{
                                 Swal.fire({
                                     title:'Created!',
@@ -99,11 +95,115 @@ const app = createApp( {
                                     }
                                 })
                                 
+                            }).catch(function (error) {
+                       
+                                if(error.response.status==400){
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'All fields must be completed',
+                                       
+                                      })
+                                }else{
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: error.response.data,
+                                       
+                                      })
+                                }
+                               
                             })
-                            .cath(console.log("err")) 
                         }
                       })
-                },   
+                },
+                deleteAccount(number){
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Do you want to delete a account?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            axios.patch('/api/clients/current/accounts',`accountNumber=${number}`)
+                            .then(response =>{
+                                Swal.fire({
+                                    title:'Deleted!',
+                                    text:'Your account has been deleted.',
+                                    icon:'success',
+                                    didOpen:()=>{
+                                        document.querySelector('.swal2-confirm').addEventListener('click', () =>{location.reload(true)})
+                                    }
+                                })
+                                
+                            }).catch(function (error) {
+                               
+                                if(error.response.status==400){
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'All fields must be completed',
+                                       
+                                      })
+                                }else{
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: error.response.data,
+                                       
+                                      })
+                                }
+                               
+                            })
+                            
+                        }
+                      })
+                },
+                payLoan(id){
+                    console.log(id);
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You want to pay a loan",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, pay it!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            axios.post('/api/clients/current',`idclientLoan=${id}&numberAccount=${this.numberAccount}&amount=${this.quota}`)
+                            .then(response =>{
+                                Swal.fire({
+                                    title:'Maked!',
+                                    text:'Your loan has been paid.',
+                                    icon:'success',
+                                    didOpen:()=>{
+                                        document.querySelector('.swal2-confirm').addEventListener('click', () =>{window.location.href='/web/accounts.html'})
+                                    }
+                                }) 
+                            }).catch(function (error) {
+                                if(error.response.status==400 || error.response.status==500){
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'All fields must be completed',
+                                       
+                                      })
+                                }else{
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: error.response.data,
+                                      })
+                                }
+                               
+                            })
+                        }
+                      })
+                },      
                 balanceFormat(){
                     this.accounts.forEach(element => {
                         element.balance = element.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
@@ -115,8 +215,15 @@ const app = createApp( {
                 loansFormat(){
                     this.loans.forEach(loan=>{
                         loan.amount=loan.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                        
                     })
+
                 },
+                quotaValue(id){ 
+                    this.loanSelect= this.loans.find(loan=>loan.id==id); 
+                    this.quota=(this.loanSelect.amountF/this.loanSelect.payments)
+                    this.quotaString=this.quota.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                }
                    
         },
 

@@ -112,7 +112,7 @@ const app = createApp( {
     },
     computed:{
         quotaValue(){  
-            this.quota=((this.amount+this.amount*0.20+(this.amount*0.20*this.loanInformation.interest))/this.payment).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+            this.quota=((this.amount+(this.amount*this.loanInformation.interest))/this.payment).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
             
         }
     },

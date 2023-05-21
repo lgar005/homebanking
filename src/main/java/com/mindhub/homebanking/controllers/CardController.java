@@ -6,13 +6,12 @@ import com.mindhub.homebanking.models.CardType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.services.CardService;
 import com.mindhub.homebanking.services.ClientService;
+import com.mindhub.homebanking.utils.CardUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
@@ -30,18 +29,12 @@ public class CardController {
         Client client=clientService.getAuthenticatedClient(authentication);
         ResponseEntity<Object> response=new ResponseEntity<>("undefined data", HttpStatus.FORBIDDEN);
         if(client!=null){
-            if(client.getCards().stream().filter(card -> card.getType()==type && card.getColor()==color).collect(Collectors.toList()).size()==0){
-                double cvv = 100+ Math.random() * 900;
-                int cvvC=(int)cvv;
-                String number="";
-                do{
-                     number=generateNumber()+"-"+generateNumber()+"-"+generateNumber()+"-"+generateNumber();
-                }while (cardService.findByNumber(number)!=null);
-                Card card= new Card(client.getFirstName()+" "+client.getLastName(),type,color,number,cvvC, LocalDateTime.now(), LocalDateTime.now().plusYears(5));
+            if(client.getCards().stream().filter(card -> card.getType()==type && card.getColor()==color && card.isActive()).collect(Collectors.toList()).size()==0){
+                Card card= new Card(client.getFirstName()+" "+client.getLastName(),type,color,cardService.numberCardNotRepeat(),CardUtils.getCvv(), LocalDateTime.now(), LocalDateTime.now().plusYears(5));
                 client.addCard(card);
                 cardService.saveCard(card);
                 response=new ResponseEntity<>(HttpStatus.CREATED);
-            } else if (client.getCards().stream().filter(card -> card.getType()==type && card.getColor()==color).collect(Collectors.toList()).size()!=0) {
+            } else if (client.getCards().stream().filter(card -> card.getType()==type && card.getColor()==color && card.isActive()).collect(Collectors.toList()).size()!=0) {
                 response=new ResponseEntity<>("You have a card with these characteristics. Acquire a different card.", HttpStatus.FORBIDDEN);
             }
             return response;
@@ -50,9 +43,19 @@ public class CardController {
         }
     }
 
-    public String generateNumber(){
-        double number=1000+ Math.random() * 9000;
-        int numberC=(int)number;
-        return  String.valueOf(numberC);
+    @PatchMapping(path = "/api/clients/current/cards")
+    public ResponseEntity<Object> deleteCard(Authentication authentication, @RequestParam String cardNumber){
+        Client client= clientService.getAuthenticatedClient(authentication);
+        Card card = cardService.findByNumber(cardNumber);
+        if(card==null){
+            return new ResponseEntity<>("The card does not exist.", HttpStatus.FORBIDDEN);
+        }if(card.getClient()!=client){
+            return new ResponseEntity<>("Please verify the information, this card does not belong to you.", HttpStatus.FORBIDDEN);
+        }else{
+            card.setActive(false);
+            cardService.saveCard(card);
+            return new ResponseEntity<>("The card has been deleted", HttpStatus.OK);
+        }
     }
+
 }

@@ -11,7 +11,8 @@ const app = createApp( {
              cardsDebit:[ ],
              cardsCredit:[ ],
              cards:[ ],
-             loading:true
+             loading:true,
+             actualDate:''
 
         }
     },
@@ -22,23 +23,21 @@ const app = createApp( {
      methods: {
          async getData(){
                     try{
-                        /*this.params=new URLSearchParams(location.search)
-                        this.id= this.params.get("id");  
-                        console.log(this.id) */
                         axios.get('/api/clients/current')
                         .then(elemento => {    
                         console.log(elemento.data)                   
                         this.client=elemento.data 
-                        this.cards=this.client.cards
+                        this.cards=this.client.cards.filter(card=>card.active)
                         this.formatDate()
                         console.log(this.client.cards)   
-                        this.cardsDebit=this.client.cards.filter(card=> card.type=="DEBIT") 
+                        this.cardsDebit=this.client.cards.filter(card=> card.type=="DEBIT" &&  card.active) 
                         console.log(this.cardsDebit)  
-                        this.cardsCredit=this.client.cards.filter(card=> card.type=="CREDIT")  
+                        this.cardsCredit=this.client.cards.filter(card=> card.type=="CREDIT" && card.active)  
                         console.log(this.cardsCredit) 
                         this.cardNumberMatrix();
                         console.log(this.cards)  
-                        this.loading=false;          
+                        this.loading=false;
+                        this.actualDate = new Date().toLocaleDateString().split(",")[0].split("/").reverse().join("-");          
                         
                         })
                      }catch{
@@ -46,11 +45,6 @@ const app = createApp( {
                      }
                 },
                 logOut(){
-                    /*axios.post('/api/logout')
-                    .then(response =>{
-                        window.location.href='/web/index.html'
-                    })
-                    .cath(console.log("err"))*/
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Do you want to log out?",
@@ -77,9 +71,6 @@ const app = createApp( {
                 formatDate(){
                     this.cards.forEach(card => {
                         card.thruDate = card.thruDate.slice(0,10)
-                        //element.creationDate=element.creationDate.toString().replace('T', ' ')
-                       
-                        
                     })
                 }
                  

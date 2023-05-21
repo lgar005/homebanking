@@ -8,4 +8,6 @@ public interface CardService {
 
     void saveCard(Card card);
 
+    String numberCardNotRepeat();
+
 }

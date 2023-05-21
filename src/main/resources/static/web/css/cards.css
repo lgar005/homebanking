@@ -432,8 +432,9 @@ select {
 .buttonCreateCard:active {
   transform: scale(0.9);
 }
-.buttonCard{
-  
+.divmessageCard{
+  background-color: #ff735a !important;
+ 
 }
 textarea{
   resize:none;

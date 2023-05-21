@@ -41,11 +41,10 @@
       </nav>
   </header>
     <main >
-      <div class="buttonCard d-flex justify-content-center align-items-center" >
-        <p class="titlesCardsDC"  v-show="cards.length<6">Get your card now: </p>
+      <div class="d-flex justify-content-center flex-wrap">
         <a class="buttonCreateCard" href="./create-cards.html" v-show="cards.length<6">Create Card</a>
+        <a class="buttonCreateCard" href="./delete-cards.html" v-show="cards.length>=1">Delete Card</a>
       </div>
-     
       <div class="d-flex justify-content-evenly parentCardContainer">
       <div class="d-flex flex-column ">
       <h2 class="titlesCardsDC pt-3 pb-3">Credit Cards</h2>
@@ -97,6 +96,11 @@
                 </div>
               </div>
             </div>
+            <template v-if="actualDate> card.thruDate ">
+              <div class="divmessageCard">
+                <h6>This Card expired </h6>
+              </div>
+            </template>  
           </div>
         </div>
         
@@ -177,6 +181,11 @@
                 </div>
               </div>
             </div>
+            <template v-if="actualDate> card.thruDate ">
+              <div>
+                <h6>This Card expired </h6>
+              </div>
+            </template> 
           </div>
         </div>
         </div>

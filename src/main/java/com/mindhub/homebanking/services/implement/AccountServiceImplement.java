@@ -5,6 +5,7 @@ import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.services.AccountService;
+import com.mindhub.homebanking.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,14 @@ public class AccountServiceImplement implements AccountService {
     @Override
     public void saveAccount(Account account) {
         accountRepository.save(account);
+    }
+
+    @Override
+    public String numberAccountNoRepeat() {
+        String number="";
+        do{
+            number= AccountUtils.getAccountNumber();
+        }while(accountRepository.findByNumber(number)!=null);
+        return number;
     }
 }

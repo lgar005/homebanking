@@ -6,102 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+          <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
-    <title>Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>   
+   <link rel="stylesheet" href="./css/cards.css">
+    <title>Create Loan</title>
 </head>
 <body>
-  <div id="app">
-  <header>
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid ">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img class=" logo " src="./img/MLogo-removebg-preview.png" alt="Logo"/>
-                <p class="titleMB px-2"> Mindhub Brothers</p>
-            </a>
-            <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end align-items-center"
-                id="navbarNav">
-                <div class="navbar-nav nav_a d-flex align-items-center">
-                    <a class="nav-link estileA" href="./create-loan.html">New Loan</a>
-                    <a class="nav-link estileA"type="button" @click="logOut">Sign out</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-    <main  class="resposiveG">
-        <img class="managerImage container d-flex justify-content-center" src="./img/Work time-amico.png" alt="manager">
-        <div class=" d-flex  justify-content-around sizeResponsive">
-           <div>
-                <h2 class="text-center colorClientList">Client Manager</h2>
-                <div class="login-box">
-                    <form>
-                        <h3>Client</h3>
-                        <div class="input-box">
-                            <span class="icon">
-                                <ion-icon name="person"></ion-icon>
-                            </span>
-                            <input type="text"  id="name" v-model="firstName">
-                            <label for="name" >Name</label>
+    <div id="app">
+      
+        <header>
+            <nav class="navbar navbar-expand-lg ">
+                <div class="container-fluid ">
+                    <a class="navbar-brand d-flex align-items-center" href="#">
+                        <img class=" logoHeader " src="./img/MLogo-removebg-preview.png" alt="Logo"/>
+                        <p class="titleMB px-2"> Mindhub Brothers</p>
+                    </a>
+                    <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end align-items-center"
+                        id="navbarNav">
+                        <div class="navbar-nav nav_a d-flex align-items-center">
+                            <a class="nav-link estileA" href="./manager.html">Manager</a>
+                            <a class="nav-link estileA"type="button" @click="logOut">Sign out</a>
                         </div>
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="person"></ion-icon></span>
-                            <input type="text"  id="lastName" v-model="lastName">
-                            <label for="lastName">Last Name</label>
-                        </div>
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                            <input type="email"  id="email" v-model="email">
-                            <label for="email" >Email</label>
-                        </div>
-                        <button class="buttonForm" type="button" @click="addClient">Add client</button>
-                    </form>
-                </div>
-            </div>
-            <div class="estileJS">
-                </h2  class="text-center colorClientList pb-5">Client Rest Response</h2>
-                <pre class="sizeJs">{{clients}}</pre>
-            </div>
-          
-        </div>
-
-        <!--Table-->
-        <h2 class="text-center colorClientList mt-5">Client List</h2>
-        <div class="container ">
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                <th class="col-4">First Name</th>
-                                <th class="col-4">Last Name</th>
-                                <th class="col-4">Email</th>
-                            </tr>
-                            </thead>
-                            <tbody class="table-light">
-                            <tr v-for="client of clients">
-                                <td>{{client.firstName}}</td>
-                                <td>{{client.lastName}}</td>
-                                <td>{{client.email}}</td>
-                            </tr>
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </main>
-       <!-- Footer -->
-       <footer class=" text-center text-white">
+            </nav>
+        </header>
+        <main>
+            <section class="h-100 h-custom" >
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-8 col-xl-6">
+                      <div class="card rounded-3">            
+                          <img src="./img/loanImage.png"class="w-100 imgForm" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+                          alt="Sample photo">
+                        <div class="card-body p-4 p-md-5">
+                          <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">New loan</h3>
+              
+                          <form class="px-md-2">
+                            
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example1q">Name of new loan: </label>
+                                <input type="text" id="form3Example1q" class="form-control" v-model="name"/>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example2q">Max amount: </label>
+                                <input type="number" id="form3Example2q" class="form-control" v-model="amount"/>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example3q">Payments: </label>
+                                <input type="text" id="form3Example3q" class="form-control" v-model="payments"/>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example4q">Interest </label>
+                                <input type="number" id="form3Example4q" class="form-control" v-model="interest"/>
+                            </div>
+                           
+                          
+                            <button type="button" class="btn colorButton btn-lg mb-1"  @click="createLoan">Create loan</button>
+              
+                          </form>
+              
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </main>
+         <!-- Footer -->
+    <footer class=" text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
           <!-- Section: Social media -->
@@ -248,15 +231,14 @@
         </div>
         <!-- Copyright -->
       </footer>
-      </div>
       <!-- Footer -->
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./js/manager.js"></script>
 </body>

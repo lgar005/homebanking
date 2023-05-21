@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet"> 
     <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
     <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>     
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'> 
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"></link>    
     <link rel="stylesheet" href="./css/styleAccounts.css">
     <title>Account</title>
 </head>
@@ -22,7 +23,7 @@
       <nav class="navbar navbar-expand-lg ">
           <div class="container-fluid ">
               <a class="navbar-brand d-flex align-items-center" href="#">
-                  <img class=" logoHeader " src="./img/MLogo-removebg-preview.png" alt="Logo"/>
+                  <img class="logo" src="./img/MLogo-removebg-preview.png" alt="Logo"/>
                   <p class="titleMB px-2"> Mindhub Brothers</p>
               </a>
               <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -42,6 +43,7 @@
       </nav>
   </header>
     <main >
+
         <h1 class="colorTitles text-center">Account</h1>
         <div class="container infoAccountTransactions">
             <div class="d-flex">
@@ -63,6 +65,19 @@
            </div>  
         </div>
 
+      <section id="table1" class="table-wrapper"> 
+        <div class="filtro d-flex justify-content-center pt-3">
+          <div class="form-group ">
+            <label>Inicio</label>
+            <div><input type="date" name="fecha_inicio v-model" v-model="initialDate"/></div>
+          </div>
+          <div class="form-group ">
+            <label>Fin</label>
+            <div><input type="date" name="fecha_fin" v-model="finalDate"/></div>
+          </div>
+        
+          <button class="buttonCreateAccount" type="button" @click="downloadPdf">Download Pdf</button>
+        </div> 
         <div class="container pt-5 pb-5">
             <div class="row">
                 <div class="col">
@@ -75,22 +90,25 @@
                                 <th class="col-3">Data</th>
                                 <th class="col-3">Description</th>
                                 <th class="col-3">Amount</th>
+                                <th class="col-3">Balance</th>
                             </tr>
                             </thead>
                             <tbody class="table-light" v-for="transaction of transactions">
-                            <tr  >
+                              <tr >
                                     <td>{{transaction.id}}</td>
                                     <td >{{transaction.type}}</td>
                                     <td >{{transaction.data}}</td>
                                     <td>{{transaction.description}}</td>
                                     <td v-bind:class=" transaction.type==='DEBIT' ? 'transactionColor text-danger' : 'transactionColor text-success'">{{transaction.amount}}</td>
-                            </tr>
+                                    <td>{{transaction.balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}}</td>
+                                  </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+      </section> 
     </main>
     <!-- Footer -->
     <footer class=" text-center text-white">
@@ -248,6 +266,13 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js" integrity="sha256-/ioiJhI6NkoUDkSyBru7JZUGXGQhdml6amBC3ApTf5A=" crossorigin="anonymous"></script>
+
     <script src="./js/account.js"></script>
 </body>
 </html>

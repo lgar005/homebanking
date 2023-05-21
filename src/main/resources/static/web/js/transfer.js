@@ -27,7 +27,7 @@ const app = createApp( {
         getData(){
             axios.get('/api/clients/current/accounts')
             .then(response=>{
-                this.accounts= response.data;
+                this.accounts= response.data.filter(account=>account.active);
                 this. balanceFormat()
                 console.log(this.accounts)
             })
@@ -55,7 +55,6 @@ const app = createApp( {
                             }
                         }) 
                     }).catch(function (error) {
-                       
                         if(error.response.status==400){
                             Swal.fire({
                                 icon: 'error',

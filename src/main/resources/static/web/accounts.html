@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-lg ">
             <div class="container-fluid ">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img class=" logoHeader " src="./img/MLogo-removebg-preview.png" alt="Logo"/>
+                    <img class=" logo" src="./img/MLogo-removebg-preview.png" alt="Logo"/>
                     <p class="titleMB px-2"> Mindhub Brothers</p>
                 </a>
                 <button class="navbar-toggler mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -76,31 +76,54 @@
         </div>
         </div>
 
-        <!--<div class="d-flex justify-content-evenly align-items-center  pt-5 ver">
-          <p v-show="accounts.length<3" class="colorTitles">Create a new account now. Remember that you can have a maximum of three accounts: </p>
-          <button class="buttonCreateAccount" type="button" @click="createAccount" v-show="accounts.length<3">Create Account</button>
-        </div>-->
+    
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Account Type</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="SAVINGS" v-model="accountType">
+                  <label class="form-check-label" for="inlineRadio1">Saving</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="CURRENT" v-model="accountType">
+                  <label class="form-check-label" for="inlineRadio2">Current</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn deleteButton" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn payButton" @click="createAccount">Create</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-center colorTitles pt-3">Your accounts</h1>
         <template v-if="accounts.length<3">
           <div class="d-flex  d-flex justify-content-center align-items-center">
           <p  class="colorTitles">Create a new account now. Remember that you can have a maximum of three accounts: </p>
-          <button class="buttonCreateAccount" type="button" @click="createAccount">Create Account</button>
+          
+          <button class="buttonCreateAccount" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            createAccount
+          </button>
         </div>
         </template>
-        <template v-else-if="loading">
-          <h6>loading...</h6>
-        </template>
-        <template v-else>
-           
-        </template>
-        <h1 class="text-center colorTitles pt-3">Your accounts</h1>
-        <!--d-flex flex-row gap-5 w-100 justify-content-center accountCardResponsive  pt-3 pb-5-->
         <div class="d-flex flex-wrap  gap-5 justify-content-center pb-5 pt-3">
-        <div class="accountCard "  v-for="account of accounts">   
+          
+        <div class="accountCard "  v-for="account of accounts"> 
+          <!--<button @click="deleteAccount(account.number)">Delete</button>-->  
             <div class="d-flex justify-content-center">
                 <img class="walletIcon" src="./img/iconBilletera.png" alt="incon-wallet">
             </div>
             <div class="data d-flex flex-column justify-content-around px-2">
-                <div class="d-flex   pt-3 ">
+              <p class="text-center pt-1">{{account.accountType}} ACCOUNT</p>
+                <div class="d-flex   pt-1 ">
                     <i class='fas fa-fingerprint px-2 iconos' style='font-size:24px'></i>
                     <p>
                         Number: {{account.number}}
@@ -120,22 +143,22 @@
                     </p>
                 </div>
             </div>
-            <div class="d-flex buttonCardsTransactions justify-content-center">
+            <div class="d-flex  justify-content-around">
+                <a @click="deleteAccount(account.number)" class="btn deleteButton">Delete</a> 
                 <a :href="'./account.html?id='+account.id" class="btn colorButton ">Transactions</a>
             </div>
-            
         </div>
         
         </div>
 
         <div>
-          <div class="d-flex  d-flex justify-content-center align-items-center">
-            <p  class="colorTitles">Apply for a loan now: </p>
-            <!--<button class="buttonCreateAccount" type="button" >Apply</button>-->
-            <a href="./loan-application.html" class="buttonCreateAccount" >Apply</a>
-          </div>
-
+        
             <h2 class="text-center colorTitles pb-2">Your loans</h2>
+            <div class="d-flex  d-flex justify-content-center align-items-center">
+              <!--<p  class="colorTitles">Apply for a loan now: </p>-->
+              
+              <a href="./loan-application.html" class="buttonCreateAccount" >Apply for loan</a>
+            </div>
             
             <template v-if="loading">
                 <h6 class="text-center colorTitles">loading...</h6>
@@ -148,10 +171,12 @@
                             <table class="table ">
                                 <thead class="table-secondary">
                                 <tr>
-                                    <th class="col-3">Id</th>
+                                    <th class="col-1">Id</th>
                                     <th class="col-3">Name</th>
-                                    <th class="col-3">Amount</th>
-                                    <th class="col-3">Payments</th>
+                                    <th class="col-2">Amount</th>
+                                    <th class="col-2">Amount F</th>
+                                    <th class="col-2">Payments</th>
+                                    <th class="col-3">Pay</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-light">
@@ -159,7 +184,12 @@
                                         <td>{{loan.id}}</td>
                                         <td >{{loan.nameLoan}}</td>
                                         <td>{{loan.amount}}</td>
+                                        <td>{{loan.amountF.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}}</td>
                                         <td>{{loan.payments}}</td>
+                                        <td><button  type="button" class="btn payButton" data-bs-toggle="modal" data-bs-target="#exampleModal2" @click="quotaValue(loan.id)">
+                                          Pay
+                                        </button> </td>
+                                         
                                 </tr>
                                 </tbody>
                             </table>
@@ -188,6 +218,37 @@
                 </div>
             </div>
             </template>
+
+            <!-- Modal -->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Pay Loan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <label for="">Account number:</label>
+                        <div class="mb-4 pt-2">
+                            <select class="select"  v-model="numberAccount">
+                                <option  v-for="account of accounts"  v-bind:value="account.number">{{account.number}}  - Balance: {{account.balance}} </option>
+                            </select>
+                        </div>
+                        <label for="">Amount of the quota</label>
+                        <div class="mb-4 pt-2">
+                            <select class="select"  v-model="quota">
+                                <option    v-bind:value="quota">{{quotaString}} </option>
+                            </select>
+                        </div>
+                      
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn deleteButton" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn payButton" @click="payLoan(loanSelect.id)">Pay</button>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
     </main>
     

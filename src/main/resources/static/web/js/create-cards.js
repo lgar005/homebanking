@@ -10,19 +10,6 @@ const app = createApp( {
     },
      methods: {
          createCard(){
-           /* axios.post('/api/clients/current/cards',`type=${this.type}&color=${this.color}`,{headers:{'content-type':'application/x-www-form-urlencoded'}})
-            .then(response =>{
-                  window.setTimeout(window.location.href='/web/cards.html', 5000);
-            })
-            .catch(function (error) {
-                console.log(error)
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: error.response.data,
-                   
-                  })
-            })*/
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to acquire a new card?",
