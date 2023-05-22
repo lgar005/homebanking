@@ -17,7 +17,7 @@ public class Loan {
     private Long id;
     private String name;
     private double  maxAmount;
-    private double interest;
+    private Double interest;
     @ElementCollection
     private List<Integer> payments;
 
@@ -64,11 +64,11 @@ public class Loan {
         this.payments = payments;
     }
 
-    public double getInterest() {
+    public Double getInterest() {
         return interest;
     }
 
-    public void setInterest(double interest) {
+    public void setInterest(Double interest) {
         this.interest = interest;
     }
 

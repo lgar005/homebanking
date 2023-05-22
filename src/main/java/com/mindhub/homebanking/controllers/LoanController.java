@@ -3,7 +3,6 @@ package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.*;
 import com.mindhub.homebanking.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -107,11 +105,14 @@ public class LoanController {
         if(loan.getPayments()==null){
             return new ResponseEntity<>("You have not set the quotas", HttpStatus.FORBIDDEN);
         }
-        if(loan.getPayments().stream().map(payment-> payment>120 && payment<=0).collect(Collectors.toList()).size()!=loan.getPayments().size()){
+        if(loan.getPayments().stream().map(payment-> payment>120 || payment<=0).collect(Collectors.toList()).size()>0){
             return new ResponseEntity<>("Some of the fees are greater than 120 or less than or equal to zero. Or it is not a numemo", HttpStatus.FORBIDDEN);
         }
         if(loanService.getAllLoansDTO().stream().filter(loanDTO -> loanDTO.getName()==loan.getName()).collect(Collectors.toList()).size()>0 ){
             return new ResponseEntity<>("Such a loan already exists", HttpStatus.FORBIDDEN);
+        }
+        if( loan.getInterest()<=0 || loan.getInterest()>=1.5) {
+            return new ResponseEntity<>("please fill in the interest field with a value less than 1.5 and greater than 1", HttpStatus.FORBIDDEN);
         }
         Loan newLoan= new Loan(loan.getName(), loan.getMaxAmount(), loan.getPayments(), loan.getInterest());
         loanService.saveLoan(newLoan);

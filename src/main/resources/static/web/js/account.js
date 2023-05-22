@@ -59,11 +59,11 @@ const app=createApp({
                         }
                     }) 
                 }).catch(function (error) {
-                    if(error.response.status==400){
+                    if(error.response.status==400 || error.response.status==500){
                         Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
-                            text: 'All fields must be completed',
+                            text: 'Please select both dates ',
                            
                           })
                     }else{

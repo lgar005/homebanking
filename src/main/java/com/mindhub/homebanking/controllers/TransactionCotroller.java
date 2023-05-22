@@ -121,8 +121,9 @@ public class TransactionCotroller {
         if(account.getClient()!=client){
             return  new ResponseEntity<>("This account does not belong to you", HttpStatus.FORBIDDEN);
         }
-
-
+        if(initialDate2.isAfter(finalDate2)){
+            return  new ResponseEntity<>("Please select the two dates", HttpStatus.FORBIDDEN);
+        }
         Document document= new Document();
         PdfWriter.getInstance(document, new FileOutputStream("transactions.pdf"));
         document.open();
