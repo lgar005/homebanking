@@ -32,6 +32,7 @@ public class WebAuthorization  {
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/rest/**").hasAuthority("ADMIN")
                 .antMatchers("/h2-console").hasAuthority("ADMIN")
+                .antMatchers("/api/loans/admin").hasAuthority("ADMIN")
                 .antMatchers("/web/manager.html").hasAuthority("ADMIN")
                 .antMatchers("/web/accounts.html").hasAuthority("CLIENT")
                 .antMatchers("/api/clients/current/accounts").hasAuthority("CLIENT")
@@ -41,6 +42,7 @@ public class WebAuthorization  {
                 .antMatchers("/web/create-cards.html").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST,"/api/transactions").hasAuthority("CLIENT")
                 .antMatchers("/api/loans").hasAuthority("CLIENT")
+                .antMatchers("/api/download").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/download").hasAuthority("CLIENT");
 
 
