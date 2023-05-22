@@ -27,7 +27,9 @@ const app = createApp( {
             .then(axios.spread((obj1, obj2) => {
                 // Both requests are now complete                
                 this.accounts=obj1.data;
+                console.log(this.accounts)
                 this.loans=obj2.data;
+                console.log(this.loans)
                 this.balanceFormat()
                
             }))
@@ -112,8 +114,9 @@ const app = createApp( {
     },
     computed:{
         quotaValue(){  
-            this.quota=((this.amount+(this.amount*this.loanInformation.interest))/this.payment).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+            this.quota=((this.amount*this.loanInformation.interest)/this.payment).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
             
+            console.log(this.quota)
         }
     },
 })
