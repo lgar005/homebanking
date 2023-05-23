@@ -81,7 +81,16 @@ const app = createApp( {
                                 text: 'All fields must be completed',
                                
                               })
-                        }else{
+                        }
+                        else if(error.response.status==500){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Verify that payments contain only numerical values',
+                               
+                              })
+                        }
+                        else{
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Oops...',

@@ -50,7 +50,7 @@ public class RepositoriesTest {
 
     @Test
     public  void cardFoundByNumber(){
-        Card card= cardRepository.findByNumber("2234-6745-5520-7888");
+        Card card= cardRepository.findByNumber("3325-6745-7876-4445");
         assertThat(card,notNullValue());
     }
 
@@ -78,11 +78,19 @@ public class RepositoriesTest {
         assertThat(clients, hasItem(hasProperty("email", containsString("@"))));
     }
 
+    @Test
+    public void namedCustomer(){
+        List<Client> clients = clientRepository.findAll();
+        assertThat(clients, hasItem(hasProperty("firstName",is(not(empty())))));}
   @Test
     public void transactionsHasPropertyDescription(){
       List<Transaction> transactions= transactionRepository.findAll();
       assertThat(transactions, hasItem(hasProperty("description")));
   }
 
+    @Test
+    public void transactionBalanceDouble(){
+        List<Transaction> transactions = transactionRepository.findAll();
+        assertThat(transactions,hasItem(hasProperty("amount",isA(double.class))));}
 
 }
